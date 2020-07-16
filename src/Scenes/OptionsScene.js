@@ -29,18 +29,18 @@ export default class OptionsScene extends Phaser.Scene {
       this.updateAudio();
     }.bind(this));
 
-    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+    this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
 
     this.updateAudio();
   }
 
   updateAudio() {
     if (this.model.musicOn === false) {
-      this.musicButton.setTexture('box');
+      this.musicButton.setTexture('box').scale = 0.5;
       this.sys.game.globals.bgMusic.stop();
       this.model.bgMusicPlaying = false;
     } else {
-      this.musicButton.setTexture('checkedBox');
+      this.musicButton.setTexture('checkedBox').scale = 0.5;
       if (this.model.bgMusicPlaying === false) {
         this.sys.game.globals.bgMusic.play();
         this.model.bgMusicPlaying = true;
@@ -48,9 +48,9 @@ export default class OptionsScene extends Phaser.Scene {
     }
   
     if (this.model.soundOn === false) {
-      this.soundButton.setTexture('box');
+      this.soundButton.setTexture('box').scale = 0.5;
     } else {
-      this.soundButton.setTexture('checkedBox');
+      this.soundButton.setTexture('checkedBox').scale = 0.5;
     }
   }
 };

@@ -8,7 +8,8 @@ export default class Button extends Phaser.GameObjects.Container {
     this.y = y;
 
     this.button = this.scene.add.sprite(0, 0, key1).setInteractive();
-    this.text = this.scene.add.text(0, 0, text, { fontSize: '32px', fill: '#fff' });
+    this.button.scale = 0.7;
+    this.text = this.scene.add.text(0, 0, text, { fontSize: '20px', fill: '#fff' });
     Phaser.Display.Align.In.Center(this.text, this.button);
 
     this.add(this.button);
@@ -19,7 +20,7 @@ export default class Button extends Phaser.GameObjects.Container {
     }.bind(this));
 
     this.button.on('pointerover', function () {
-      this.button.setTexture(key2);
+      this.button.setTexture(key2).scale = 0.7;
     }.bind(this));
 
     this.button.on('pointerout', function () {

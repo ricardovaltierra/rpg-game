@@ -1,5 +1,6 @@
 import 'phaser';
-import ZenvaLogo from '../assets/zenva_logo.png';
+// import ZenvaLogo from '../assets/zenva_logo.png';
+import Apple from '../assets/jabolko(red).png';
 
 export default class BootScene extends Phaser.Scene {
   constructor () {
@@ -7,7 +8,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('logo', ZenvaLogo);
+    this.load.image('logo', Apple);
   }
   
   create () {
