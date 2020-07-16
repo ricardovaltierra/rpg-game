@@ -4,8 +4,10 @@
   "description": "Video game on ES6 basis with Phaser framework and Webpack 3 (including Jest TDD)",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,17 @@
   "homepage": "https://github.com/ricardovaltierra/RPG-Game#readme",
   "keywords": [],
   "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "babel-core": "6",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.0.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^4.5.1",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^3.1.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "webpack-merge": "^4.2.2",
     "css-loader": "^3.6.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
@@ -32,5 +45,8 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "phaser": "^3.20.1"
   }
 }
