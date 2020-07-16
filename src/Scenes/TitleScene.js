@@ -9,21 +9,24 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create () {
+
+    this.logo = this.add.image(400, 200, 'logo').setOrigin(0.5, 1.2);
+    this.logo.scale = 0.5;
     
     // Game
-    this.gameButton = new Button(this, config.width/2, config.height/2 - 200, 'redButton1', 'redButton2', 'Play', 'Game');
+    this.gameButton = new Button(this, config.width/2, config.height/2 - 70, 'redButton1', 'redButton2', 'Play', 'Game');
 
     // Options
-    this.optionsButton = new Button(this, config.width/2, config.height/2 - 100, 'redButton1', 'redButton2', 'Options', 'Options');
+    this.optionsButton = new Button(this, config.width/2, config.height/2, 'redButton1', 'redButton2', 'Options', 'Options');
 
     // Credits
-    this.creditsButton = new Button(this, config.width/2, config.height/2, 'redButton1', 'redButton2', 'Credits', 'Credits');
+    this.creditsButton = new Button(this, config.width/2, config.height/2 + 70, 'redButton1', 'redButton2', 'Credits', 'Credits');
 
     // Instructions
-    this.creditsButton = new Button(this, config.width/2, config.height/2 + 100, 'redButton1', 'redButton2', 'Instructions', 'Instructions');
+    this.creditsButton = new Button(this, config.width/2, config.height/2 + 140, 'redButton1', 'redButton2', 'Instructions', 'Instructions');
 
     // Leaderboard
-    this.creditsButton = new Button(this, config.width/2, config.height/2 + 200, 'redButton1', 'redButton2', 'Leaderboard', 'Leaderboard');
+    this.creditsButton = new Button(this, config.width/2, config.height/2 + 210, 'redButton1', 'redButton2', 'Leaderboard', 'Leaderboard');
 
     this.model = this.sys.game.globals.model;
     if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
