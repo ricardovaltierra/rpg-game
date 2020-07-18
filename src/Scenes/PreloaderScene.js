@@ -1,7 +1,6 @@
 import 'phaser';
 import RedButton1 from '../assets/ui/buttonStock1.png';
 import RedButton2 from '../assets/ui/buttonStock1h.png';
-import Logo from '../assets/logo.png';
 import BoxSelect from '../assets/ui/boxNormal.png';
 import BoxNormal from '../assets/ui/boxSelect.png'
 import MusicTheme from '../assets/TownTheme.mp3';
@@ -85,7 +84,6 @@ export default class PreloaderScene extends Phaser.Scene {
     // load assets needed in our game
     this.load.image('redButton1', RedButton1);
     this.load.image('redButton2', RedButton2);
-    this.load.image('phaserLogo', Logo);
 
     this.load.image('box', BoxNormal);
     this.load.image('checkedBox', BoxSelect);
