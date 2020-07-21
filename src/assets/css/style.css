@@ -1,0 +1,12 @@
+body {
+  width:100vw;
+  height: 90vh;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+}
+canvas {
+  align-self:center;
+  width: 800px;
+  height: 600px;
+}
