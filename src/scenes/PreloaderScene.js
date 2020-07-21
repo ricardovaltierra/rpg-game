@@ -6,7 +6,8 @@ import BoxNormal from '../assets/ui/boxSelect.png'
 import MusicTheme from '../assets/TownTheme.mp3';
 import Grass from '../assets/map/map.jpg';
 import Tree from '../assets/map/tree.png';
-import LRRH from '../assets/lrrd.png';
+import MapPiece from '../assets/map/map-piece.jpg';
+import LRRH from '../assets/$childRed.png';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor () {
@@ -96,9 +97,10 @@ export default class PreloaderScene extends Phaser.Scene {
     // map
     this.load.image('grass', Grass);
     this.load.image('tree', Tree);
+    this.load.image('map-piece', MapPiece);
 
     // player
-    // this.load.spritesheet('player', LRRH);
+    this.load.spritesheet('player', LRRH, { frameWidth: 32, frameHeight: 32, margin: 0, spacing: 0 });
 
   }
 

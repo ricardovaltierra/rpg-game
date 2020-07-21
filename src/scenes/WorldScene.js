@@ -9,41 +9,135 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   create () {
-    const map = this.add.image(450, 300, 'grass');
+    const map = this.add.tileSprite(118, 113, 2200, 2500, 'map-piece');
 
     this.trees = this.physics.add.staticGroup();
 
-    for (let i = 20; i < 800; i += 32) {
-      for (let j = 150; j < 200; j += 18) {
-        const x = Phaser.Math.RND.between(20, 800);
-        const y = Phaser.Math.RND.between(130, 220);
-        this.trees.create(x, y, 'tree');
-        this.trees.create(i, j, 'tree');
+    // First tree row
+    for (let i = 28; i < 800; i += 32) {
+      for (let j = 200; j < 350; j += 18) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
       }
     }
 
-    for (let i = 100; i < 900; i += 32) {
-      for (let j = 350; j < 400; j += 18) {
-        const x = Phaser.Math.RND.between(100, 900);
-        const y = Phaser.Math.RND.between(330, 420);
-        this.trees.create(x, y, 'tree');
-        this.trees.create(i, j, 'tree');
+    for (let i = 1000; i < 1200; i += 32) {
+      for (let j = 200; j < 350; j += 18) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
       }
     }
 
-    for (let i = 20; i < 800; i += 42) {
-      for (let j = 500; j < 525; j += 22) {
-        const x = Phaser.Math.RND.between(20, 800);
-        const y = Phaser.Math.RND.between(510, 530);
-        this.trees.create(x, y, 'tree');
-        this.trees.create(i, j, 'tree');
+    // Second tree row
+    for (let i = 28; i < 210; i += 32) {
+      for (let j = 600; j < 750; j += 18) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
       }
     }
 
-    this.overlapForest = this.physics.add.overlap(
-      this.trees,
-      false,
-      this,
-    );
+    for (let i = 425; i < 1200; i += 32) {
+      for (let j = 600; j < 750; j += 18) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
+      }
+    }
+
+    // Third tree row
+    for (let i = 28; i < 950; i += 42) {
+      for (let j = 1000; j < 1150; j += 22) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
+      }
+    }
+
+    for (let i = 1110; i < 1200; i += 42) {
+      for (let j = 1000; j < 1150; j += 22) {
+        this.trees.create(i, j, 'tree').scale = 0.6;
+      }
+    }
+
+    this.player = this.physics.add.sprite(80,70, 'player', 1);
+    this.player.scale = 1.2;
+    this.physics.world.bounds.width = 1218;
+    this.physics.world.bounds.height = 1363;
+    this.player.setCollideWorldBounds(true);
+    this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.cameras.main.setBounds(0,0, 1218, 1363);
+    // this.cameras.main.zoom = 2;
+    this.cameras.main.startFollow(this.player);
+    this.cameras.main.roundPixels = true;
+
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('player', { frames: [4, 3, 4, 5]}),
+      frameRate: 7,
+      repeat: -1,
+    })
+
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('player', { frames: [7, 6, 7, 8] }),
+      frameRate: 7,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'up',
+      frames: this.anims.generateFrameNumbers('player', { frames: [10, 9, 10, 11] }),
+      frameRate: 7,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'down',
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 0, 1, 2] }),
+      frameRate: 7,
+      repeat: -1,
+    });
+
+    this.physics.add.collider(this.player, this.trees);
+
+  }
+
+  update(time, delta) {
+	  this.player.body.setVelocity(0);
+
+    // Horizontal movement
+    if (this.cursors.left.isDown)
+    {
+      this.player.body.setVelocityX(-250);
+    }
+    else if (this.cursors.right.isDown)
+    {
+      this.player.body.setVelocityX(250);
+    }
+
+    // Vertical movement
+    if (this.cursors.up.isDown)
+    {
+      this.player.body.setVelocityY(-250);
+    }
+    else if (this.cursors.down.isDown)
+    {
+      this.player.body.setVelocityY(250);
+    }
+
+    if (this.cursors.left.isDown)
+    {
+        this.player.anims.play('left', true);
+    }
+    else if (this.cursors.right.isDown)
+    {
+        this.player.anims.play('right', true);
+    }
+    else if (this.cursors.up.isDown)
+    {
+        this.player.anims.play('up', true);
+    }
+    else if (this.cursors.down.isDown)
+    {
+        this.player.anims.play('down', true);
+    }
+    else
+    {
+        this.player.anims.stop();
+    }
   }
 };
