@@ -1,12 +1,32 @@
 import 'phaser';
+// UI
 import RedButton1 from '../assets/ui/buttonStock1.png';
 import RedButton2 from '../assets/ui/buttonStock1h.png';
 import BoxSelect from '../assets/ui/boxNormal.png';
 import BoxNormal from '../assets/ui/boxSelect.png'
 import MusicTheme from '../assets/TownTheme.mp3';
+// map
 import Tree from '../assets/map/tree.png';
 import MapPiece from '../assets/map/map-piece.jpg';
+// heroes
 import LRRH from '../assets/$childRed.png';
+import Knight1 from '../assets/knights/knight1.png';
+import Knight2 from '../assets/knights/knight2.png';
+// enemies
+import Werewolf1 from '../assets/werewolfs/werewolf1.png';
+import Werewolf2 from '../assets/werewolfs/werewolf2.png';
+import Vampire1 from '../assets/vampires/vampire1.png';
+import Vampire2 from '../assets/vampires/vampire2.png';
+import Ghost1 from '../assets/ghosts/ghost1.png';
+import Ghost2 from '../assets/ghosts/ghost2.png';
+import Monster1 from '../assets/monsters/monster1.png';
+import Monster2 from '../assets/monsters/monster2.gif';
+import Wizard1 from '../assets/wizards/wizard1.png';
+import Wizard2 from '../assets/wizards/wizard2.gif';
+import Witch1 from '../assets/witches/witch1.png';
+import Witch2 from '../assets/witches/witch2.png';
+import Zombie1 from '../assets/zombies/zombie1.png';
+import Zombie2 from '../assets/zombies/zombie2.png';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor () {
@@ -98,8 +118,25 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('tree', Tree);
 
     // player
-    this.load.spritesheet('player', LRRH, { frameWidth: 32, frameHeight: 32, margin: 0, spacing: 0 });
+    this.load.spritesheet('player', LRRH, { frameWidth: 32, frameHeight: 32 });
+    this.load.image('knight1', Knight1);
+    this.load.image('knight2', Knight2);
 
+    // enemies
+    this.load.image('werewolf1', Werewolf1);
+    this.load.image('werewolf2', Werewolf2);
+    this.load.image('vampire1', Vampire1);
+    this.load.image('vampire2', Vampire2);
+    this.load.image('wizard1', Wizard1);
+    this.load.image('wizard2', Wizard2);
+    this.load.image('monster1', Monster1);
+    this.load.image('monster2', Monster2);
+    this.load.image('ghost1', Ghost1);
+    this.load.image('ghost2', Ghost2);
+    this.load.image('witch1', Witch1);
+    this.load.image('witch2', Witch2);
+    this.load.image('zombie1', Zombie1);
+    this.load.image('zombie2', Zombie2);
   }
 
   create () {
