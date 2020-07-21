@@ -1,6 +1,5 @@
 import 'phaser';
 import Apple from '../assets/jabolko(red).png';
-import Grass from '../assets/map/map.jpg';
 
 export default class BootScene extends Phaser.Scene {
   constructor () {
@@ -9,7 +8,6 @@ export default class BootScene extends Phaser.Scene {
 
   preload () {
     this.load.image('logo', Apple);
-    this.load.image('forest-grass', Grass);
   }
   
   create () {

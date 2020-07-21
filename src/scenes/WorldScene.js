@@ -9,7 +9,7 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   create () {
-    const map = this.add.tileSprite(118, 113, 2200, 2500, 'map-piece');
+    const map = this.add.tileSprite(118, 113, 2300, 2600, 'map-piece');
 
     this.trees = this.physics.add.staticGroup();
 
@@ -60,7 +60,6 @@ export default class WorldScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.cameras.main.setBounds(0,0, 1218, 1363);
-    // this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true;
 
@@ -94,6 +93,14 @@ export default class WorldScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.trees);
 
+    this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
+    for(var i = 0; i < 50; i++) {
+        var x = Phaser.Math.RND.between(0, 1218);
+        var y = Phaser.Math.RND.between(0, 1363);
+        // parameters are x, y, width, height
+        this.spawns.create(x, y, 20, 20);            
+    }        
+    this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
   }
 
   update(time, delta) {
@@ -139,5 +146,18 @@ export default class WorldScene extends Phaser.Scene {
     {
         this.player.anims.stop();
     }
+  }
+
+  onMeetEnemy(player, zone) {        
+    // we move the zone to some other location
+    zone.x = Phaser.Math.RND.between(0, 1218);
+    zone.y = Phaser.Math.RND.between(0, 1363);
+
+    // shake the world
+    this.cameras.main.shake(300);
+    // this.cameras.main.fade(300);
+
+    // start battle 
+    
   }
 };
