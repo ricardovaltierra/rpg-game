@@ -101,6 +101,29 @@ export default class WorldScene extends Phaser.Scene {
         this.spawns.create(x, y, 20, 20);            
     }        
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+
+    this.sys.events.on('wake', this.wake, this);
+  }
+
+  wake() {
+    this.cursors.left.reset();
+    this.cursors.right.reset();
+    this.cursors.up.reset();
+    this.cursors.down.reset();
+  }
+
+  onMeetEnemy(player, zone) {        
+    // we move the zone to some other location
+    zone.x = Phaser.Math.RND.between(0, 1218);
+    zone.y = Phaser.Math.RND.between(0, 1363);
+
+    // shake the world
+    this.cameras.main.shake(300);
+    // this.cameras.main.fade(300);
+
+    this.input.stopPropagation();
+    // start battle 
+    this.scene.switch('BattleScene');
   }
 
   update(time, delta) {
@@ -146,18 +169,5 @@ export default class WorldScene extends Phaser.Scene {
     {
         this.player.anims.stop();
     }
-  }
-
-  onMeetEnemy(player, zone) {        
-    // we move the zone to some other location
-    zone.x = Phaser.Math.RND.between(0, 1218);
-    zone.y = Phaser.Math.RND.between(0, 1363);
-
-    // shake the world
-    this.cameras.main.shake(300);
-    // this.cameras.main.fade(300);
-
-    // start battle 
-    
   }
 };

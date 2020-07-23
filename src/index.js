@@ -12,6 +12,7 @@ import LeaderboardScene from './scenes/LeaderboardScene';
 import GameOverScene from './scenes/GameOverScene';
 import WinnerScene from './scenes/WinnerScene';
 import WorldScene from './scenes/WorldScene';
+import { BattleScene, UIScene }from './scenes/Battle';
 
 class Game extends Phaser.Game {
   constructor () {
@@ -28,6 +29,8 @@ class Game extends Phaser.Game {
     this.scene.add('GameOver', GameOverScene);
     this.scene.add('Winner', WinnerScene);
     this.scene.add('World', WorldScene);
+    this.scene.add('BattleScene', BattleScene);
+    this.scene.add('UIScene', UIScene);
     this.scene.start('Boot');
   }
 }
