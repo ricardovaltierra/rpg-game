@@ -8,6 +8,8 @@ import MusicTheme from '../assets/TownTheme.mp3';
 // map
 import Tree from '../assets/map/tree.png';
 import MapPiece from '../assets/map/map-piece.jpg';
+// battlefield
+import Landscape from '../assets/landscape.jpg';
 // heroes
 import LRRH from '../assets/$childRed.png';
 import Knight1 from '../assets/knights/knight1.png';
@@ -117,6 +119,8 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('map-piece', MapPiece);
     this.load.image('tree', Tree);
 
+    // battlefield
+    this.load.image('forest-landscape', Landscape);
     // player
     this.load.spritesheet('player', LRRH, { frameWidth: 32, frameHeight: 32 });
     this.load.image('knight1', Knight1);
