@@ -118,8 +118,8 @@ export default class WorldScene extends Phaser.Scene {
     zone.y = Phaser.Math.RND.between(0, 1363);
 
     // shake the world
+    this.cameras.main.flash(300);
     this.cameras.main.shake(300);
-    // this.cameras.main.fade(300);
 
     this.input.stopPropagation();
     // start battle 

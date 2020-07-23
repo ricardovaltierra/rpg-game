@@ -204,14 +204,14 @@ var Message = new Phaser.Class({
 
   initialize:
     function Message(scene, events) {
-      Phaser.GameObjects.Container.call(this, scene, 160, 30);
+      Phaser.GameObjects.Container.call(this, scene, 160, 20);
       var graphics = this.scene.add.graphics();
       this.add(graphics);
       graphics.lineStyle(1, 0xffffff, 0.8);
       graphics.fillStyle(0x031f4c, 0.3);
-      graphics.strokeRect(-90, -15, 180, 50);
-      graphics.fillRect(-90, -15, 180, 50);
-      this.text = new Phaser.GameObjects.Text(scene, 0, 10, "", { color: '#ffffff', align: 'center', fontSize: 13, wordWrap: { width: 170, useAdvancedWrap: true } });
+      graphics.strokeRect(100, 50, 300, 150);
+      graphics.fillRect(100, 50, 300, 150);
+      this.text = new Phaser.GameObjects.Text(scene, 250, 120, "", { color: '#ffffff', align: 'center', fontSize: 23, wordWrap: { width: 260, useAdvancedWrap: true } });
       this.add(this.text);
       this.text.setOrigin(0.5);
       events.on("Message", this.showMessage, this);
@@ -242,28 +242,28 @@ var BattleScene = new Phaser.Class({
   create: function () {
     // change the background to green
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
-    this.startBattle;
+    this.startBattle();
     // on wake event we call startBattle too
     this.sys.events.on('wake', this.startBattle, this); 
   },
   startBattle: function() {
     // player character - warrior
-        var knight1 = new PlayerCharacter(this, 220, 50, 'knight1', 1, 'Knight 1', 100, 20);
-        knight1.scale = 0.15;
+        var knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
+        knight1.scale = 0.45;
         knight1.flipX = false;
         this.add.existing(knight1);
     
         // player character - mage
-        var knight2 = new PlayerCharacter(this, 280, 100, 'knight2', 4, 'Knight 2', 80, 8);
-        knight2.scale = 0.06;
+        var knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 80, 8);
+        knight2.scale = 0.16;
         this.add.existing(knight2);
     
-        var werewolf1 = new Enemy(this, 80, 40, 'werewolf1', null, 'Werewolf', 50, 3);
-        werewolf1.scale = 0.3;
+        var werewolf1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
+        werewolf1.scale = 0.7;
         this.add.existing(werewolf1);
     
-        var vampire1 = new Enemy(this, 50, 100, 'vampire1', null, 'Vampire', 50, 3);
-        vampire1.scale = 0.3;
+        var vampire1 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
+        vampire1.scale = 0.9;
         this.add.existing(vampire1);
     
         // array with heroes
@@ -357,20 +357,21 @@ var UIScene = new Phaser.Class({
         // draw some background for the menu
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
-        this.graphics.fillStyle(0x031f4c, 1);        
-        this.graphics.strokeRect(2, 150, 90, 100);
-        this.graphics.fillRect(2, 150, 90, 100);
-        this.graphics.strokeRect(95, 150, 90, 100);
-        this.graphics.fillRect(95, 150, 90, 100);
-        this.graphics.strokeRect(188, 150, 130, 100);
-        this.graphics.fillRect(188, 150, 130, 100);
+        this.graphics.fillStyle(0x031f4c, 1);
+        this.graphics.strokeRect(2, 398, 290, 200);
+        this.graphics.fillRect(2, 398, 290, 200);
+        this.graphics.strokeRect(300, 398, 200, 200);
+        this.graphics.fillRect(300, 398, 200, 200);
+        this.graphics.strokeRect(508, 398, 290, 200);
+        this.graphics.fillRect(508, 398, 290, 200);
         
         // basic container to hold all menus
         this.menus = this.add.container();
+        this.menus.scale = 2;
                 
-        this.heroesMenu = new HeroesMenu(195, 153, this);           
-        this.actionsMenu = new ActionsMenu(100, 153, this);            
-        this.enemiesMenu = new EnemiesMenu(8, 153, this);   
+        this.heroesMenu = new HeroesMenu(275, 210, this);           
+        this.actionsMenu = new ActionsMenu(170, 210, this);            
+        this.enemiesMenu = new EnemiesMenu(8, 210, this);   
         
         // the currently selected menu 
         this.currentMenu = this.actionsMenu;
@@ -385,7 +386,7 @@ var UIScene = new Phaser.Class({
         // listen for keyboard events
         this.input.keyboard.on("keydown", this.onKeyInput, this);   
         
-        // when its player cunit turn to move
+        // when its player unit turn to move
         this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
         
         // when the action on the menu is selected
