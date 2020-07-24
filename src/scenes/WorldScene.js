@@ -1,5 +1,5 @@
 import 'phaser';
-import getPunctuation from '../api/punctuation';
+import { getPunctuation } from '../api/punctuation';
 import { BattleScene, UIScene } from './Battle';
 
 export default class WorldScene extends Phaser.Scene {
@@ -142,37 +142,13 @@ export default class WorldScene extends Phaser.Scene {
     this.endZone.create(120, 1260, 120, 120);
     this.physics.add.overlap(this.player, this.endZone, this.onReachHouse, false, this);
 
-    // Trigger action on everlaping zone just once
-    // this.overlapTriggered =false;
-
-    // this.overlapTrees = this.physics.add.overlap(this.player, this.trees, this.onMeetEnemy, false, this);
-
-    this.textPunctuation = this.add.text(210, 157, `Punctuation: ${ getPunctuation() }`, { fontSize: '14px', fill: '#fff'});
+    this.textPunctuation = this.add.text(610, 5, `Punctuation: ${ getPunctuation() }`, { fontSize: '16px', fill: '#fff'});
     this.textPunctuation.setScrollFactor(0, 0);
 
     this.sys.events.on('wake', this.wake, this);
   }
 
   wake() {
-    // if (this.playerY < 153) {
-    //   this.player.x = 50;
-    //   this.player.y = 50;
-    // } else if (this.playerY >= 153 && this.playerY < 328) {
-    //   this.player.x = 850;
-    //   this.player.y = 270;
-    // } else if (this.playerY >= 328 && this.playerY < 488) {
-    //   this.player.x = 50;
-    //   this.player.y = 450;
-    // } else if (this.playerY >= 488 && this.playerX > 125) {
-    //   this.player.x = 850;
-    //   this.player.y = 575;
-    // } else if (this.playerY >= 485 && this.playerX <= 125) {
-    //   this.player.x = 100;
-    //   this.player.y = 575;
-    // } else {
-    //   this.player.x = 50;
-    //   this.player.y = 50;
-    // }
 
     this.textPunctuation.setText(`Punctuation: ${ getPunctuation() }`);
 
@@ -199,7 +175,7 @@ export default class WorldScene extends Phaser.Scene {
     // start battle    
 
     this.scene.sleep('World');
-    // console.log(`launching battle with enemy: ${creatureType.name} and y player position ${ this.player.y }`);
+  
     this.scene.launch('BattleScene', { enemy: creatureType.name, y: this.player.y });
 
   }

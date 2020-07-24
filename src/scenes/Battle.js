@@ -493,34 +493,34 @@ const BattleScene = new Phaser.Class({
         result = 10;
         break;
       case 'group2':
-        result = 20;
+        result = 200;
         break;
       case 'group3':
-        result = 30;
+        result = 300;
         break;
       case 'group4':
-        result = 40;
+        result = 400;
         break;
       case 'group5':
-        result = 50;
+        result = 500;
         break;
       case 'group6':
-        result = 60;
+        result = 600;
         break;
       case 'group7':
-        result = 70;
+        result = 700;
         break;
       case 'group8':
-        result = 150;
+        result = 1200;
         break;
       case 'group9':
-        result = 70;
+        result = 800;
         break;
       case 'group10':
-        result = 60;
+        result = 900;
         break;
       case 'group11':
-        result = 200;
+        result = 2000;
         break;
       default:
         result = 10;
