@@ -97,37 +97,37 @@ export default class WorldScene extends Phaser.Scene {
 
     // this.physics.add.collider(this.player, this.trees);
     
-    const group1 = this.add.zone(200,100).setSize(50, 50);
+    const group1 = this.add.zone(200,100).setSize(100, 100);
     group1.name = 'group1';
 
-    const group2 = this.add.zone(500,150).setSize(50, 100);
+    const group2 = this.add.zone(500,150).setSize(100, 100);
     group2.name = 'group2';
 
-    const group3 = this.add.zone(850,110).setSize(100, 50);
+    const group3 = this.add.zone(850,110).setSize(100, 100);
     group3.name = 'group3';
 
     const group4 = this.add.zone(950,350).setSize(100, 100);
     group4.name = 'group4';
 
-    const group5 = this.add.zone(550,480).setSize(150, 100);
+    const group5 = this.add.zone(550,480).setSize(100, 100);
     group5.name = 'group5';
 
-    const group6 = this.add.zone(300,860).setSize(100, 150);
+    const group6 = this.add.zone(300,860).setSize(100, 100);
     group6.name = 'group6';
 
-    const group7 = this.add.zone(750,850).setSize(150, 150);
+    const group7 = this.add.zone(750,850).setSize(100, 100);
     group7.name = 'group7';
 
-    const group8 = this.add.zone(1000,1100).setSize(50, 150);
+    const group8 = this.add.zone(1000,1100).setSize(100, 100);
     group8.name = 'group8';
 
-    const group9 = this.add.zone(750,1270).setSize(150, 50);
+    const group9 = this.add.zone(750,1270).setSize(100, 100);
     group9.name = 'group9';
 
-    const group10 = this.add.zone(490,1270).setSize(15, 185);
+    const group10 = this.add.zone(490,1270).setSize(100, 100);
     group10.name = 'group10';
 
-    const group11 = this.add.zone(300,1280).setSize(200, 200);
+    const group11 = this.add.zone(300,1280).setSize(150, 150);
     group11.name = 'group11';
 
     [group1, group2, group3, group4, group5, group6, group7, group8, group9, group10, group11].map((group) => {
@@ -140,6 +140,11 @@ export default class WorldScene extends Phaser.Scene {
     this.endZone.create(120, 1260, 120, 120);
     this.physics.add.overlap(this.player, this.endZone, this.onReachHouse, false, this);
 
+    // Trigger action on everlaping zone just once
+    // this.overlapTriggered =false;
+
+    // this.overlapTrees = this.physics.add.overlap(this.player, this.trees, this.onMeetEnemy, false, this);
+
     this.sys.events.on('wake', this.wake, this);
   }
 
@@ -150,18 +155,21 @@ export default class WorldScene extends Phaser.Scene {
     this.cursors.down.reset();
   }
 
-  onMeetEnemy(player, zone) {        
-    // we move the zone to some other location
-    zone.x = Phaser.Math.RND.between(0, 1218);
-    zone.y = Phaser.Math.RND.between(0, 1363);
+  onMeetEnemy(player, creatureType) {
+    creatureType.x = 1200;
+    creatureType.y = 800;
+
+    this.playerX = this.player.x;
+    this.playerY = this.player.y;
 
     // shake the world
     this.cameras.main.flash(300);
     this.cameras.main.shake(300);
 
-    this.input.stopPropagation();
-    // start battle 
-    this.scene.switch('BattleScene');
+    // start battle    
+
+    this.scene.sleep('World');
+    this.scene.launch('BattleScene', { enemy: creatureType.name, y: this.player.y });
   }
 
   onReachHouse(player, zone) {
@@ -170,10 +178,10 @@ export default class WorldScene extends Phaser.Scene {
 
     this.cameras.main.fade(300);
 
-    this.input.stopPropagation();
+    // this.scene.start('Winner');
   }
 
-  update(time, delta) {
+  update() {
 	  this.player.body.setVelocity(0);
 
     // Horizontal movement

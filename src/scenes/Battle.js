@@ -239,15 +239,21 @@ var BattleScene = new Phaser.Class({
     function BattleScene() {
       Phaser.Scene.call(this, { key: 'BattleScene' });
     },
-  create: function () {
-    // change the background to green
-    // this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
+
+  init(data) {
+    this.enemyData = data.enemy;
+    this.playerY = data.y;
+  },
+
+  create() {
+    
     this.add.image(400, 300, 'forest-landscape');
-    this.startBattle();
+    this.startBattle(this.enemyData);
+
     // on wake event we call startBattle too
     this.sys.events.on('wake', this.startBattle, this); 
   },
-  startBattle: function() {
+  startBattle(data) {
     // player character - warrior
         var knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
         knight1.scale = 0.45;
@@ -258,20 +264,140 @@ var BattleScene = new Phaser.Class({
         var knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 80, 8);
         knight2.scale = 0.16;
         this.add.existing(knight2);
+
+        console.log(data);
+        console.log(this.playerY);
     
-        var werewolf1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
-        werewolf1.scale = 0.7;
-        this.add.existing(werewolf1);
+        let creature1;
+        let creature2;
+
+
+        switch (data) {
+          case 'group1':
+            
+            creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
+            creature1.scale = 0.7;
+
+            creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
+            creature2.scale = 0.9;
+
+            break;
+          case 'group2':
+            
+            creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 50, 3);
+            creature1.scale = 0.19;
+
+            creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 50, 3);
+            creature2.scale = 0.8;
+
+            break;
+          case 'group3':
+            
+            creature1 = new Enemy(this, 200, 110, 'werewolf2', null, 'Werewolf', 50, 3);
+            creature1.scale = 0.18;
+
+            creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 50, 3);
+            creature2.scale = 0.35;
+
+            break;
+          case 'group4':
+            
+            creature1 = new Enemy(this, 200, 130, 'wizard1', null, 'Wizard', 50, 3);
+            creature1.scale = 0.35;
+
+            creature2 = new Enemy(this, 120, 300, 'ghost2', null, 'Ghost', 50, 3);
+            creature2.flipX = true;
+            creature2.scale = 0.5;
+
+            break;
+          case 'group5':
+            
+            creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 50, 3);
+            creature1.flipX = true;
+            creature1.scale = 0.25;
+
+            creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 50, 3);
+            creature2.flipX = true;
+            creature2.scale = 0.3;
+
+            break;
+          case 'group6':
+            
+            creature1 = new Enemy(this, 100, 160, 'wizard2', null, 'Wizard', 50, 3);
+            creature1.scale = 0.5;
+
+            creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 50, 3);
+            creature2.scale = 0.7;
+
+            break;
+          case 'group7':
+            
+            creature1 = new Enemy(this, 200, 140, 'zombie2', null, 'Zombie', 50, 3);
+            creature1.flipX = true;
+            creature1.scale = 0.4;
+
+            creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 50, 3);
+            creature2.scale = 0.21;
+
+            break;
+          case 'group8':
+            
+            creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 50, 3);
+            creature1.flipX = true;
+            creature1.scale = 0.25;
+
+            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 50, 3);
+            creature2.scale = 0.35;
+
+            break;
+          case 'group9':
+            
+            creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 50, 3);
+            creature1.flipX = true;
+            creature1.scale = 0.25;
+
+            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 3);
+            creature2.scale = 0.19;
+
+            break;
+          case 'group10':
+            
+            creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 50, 3);
+            creature1.flipX = true;
+            creature1.scale = 0.38;
+
+            creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 50, 3);
+            creature2.scale = 0.9;
+
+            break;
+          case 'group11':
+            
+            creature1 = new Enemy(this, 200, 200, 'witch2', null, 'Witch', 200, 30);
+            creature1.scale = 0.7;
+
+            break;
+          default:
+
+            creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
+            creature1.scale = 0.7;
+
+            creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
+            creature2.scale = 0.9;
+
+            break;
+        }
     
-        var vampire1 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
-        vampire1.scale = 0.9;
-        this.add.existing(vampire1);
-    
-        // array with heroes
         this.heroes = [knight1, knight2];
-        // array with enemies
-        this.enemies = [werewolf1, vampire1];
-        // array with both parties, who will attack
+
+        this.add.existing(creature1);
+
+        if (!creature2) {
+          this.enemies = [creature1];
+        } else {
+          this.add.existing(creature2);
+          this.enemies = [creature1, creature2];
+        }
+      
         this.units = this.heroes.concat(this.enemies);
     
         this.index = -1;

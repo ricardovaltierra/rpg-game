@@ -25,7 +25,7 @@ import Ghost2 from '../assets/ghosts/ghost2.png';
 import Monster1 from '../assets/monsters/monster1.png';
 import Monster2 from '../assets/monsters/monster2.gif';
 import Wizard1 from '../assets/wizards/wizard1.png';
-import Wizard2 from '../assets/wizards/wizard2.gif';
+import Wizard2 from '../assets/wizards/wizard2.png';
 import Witch1 from '../assets/witches/witch1.png';
 import Witch2 from '../assets/witches/witch2.png';
 import Zombie1 from '../assets/zombies/zombie1.png';
