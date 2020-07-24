@@ -180,13 +180,13 @@ export default class WorldScene extends Phaser.Scene {
 
   }
 
-  onReachHouse() {
+  onReachHouse(player, zone) {
     zone.x = Phaser.Math.RND.between(0, 1218);
     zone.y = Phaser.Math.RND.between(0, 1363);
 
-    this.cameras.main.fade(300);
+    this.cameras.main.flash(300);
 
-    // this.scene.start('Winner');
+    this.scene.start('Winner');
   }
 
   update() {
