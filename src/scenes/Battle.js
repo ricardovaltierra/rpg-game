@@ -245,14 +245,11 @@ const BattleScene = new Phaser.Class({
     },
 
   init(data) {
-    console.log('before set init');
     this.dataEnemy = data.enemy;
     this.playerY = data.y;
-    console.log(`Enemy data: ${ this.data }, player position Y: ${ this.playerY }`);
   },
 
   create() {
-    console.log('on create');
     this.add.image(400, 300, 'forest-landscape');
     this.startBattle(this.dataEnemy);
 
@@ -261,7 +258,7 @@ const BattleScene = new Phaser.Class({
   },
   startBattle(data) {
     // player character - warrior
-        let knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
+        const knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
         knight1.scale = 0.45;
         knight1.flipX = false;
         this.add.existing(knight1);
@@ -270,12 +267,9 @@ const BattleScene = new Phaser.Class({
         let knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 100, 15);
         knight2.scale = 0.16;
         this.add.existing(knight2);
-
-        // console.log(data);
-        // console.log(this.playerY);
     
-        let creature1;
-        let creature2;
+        let creature1 = '';
+        let creature2 = '';
 
         switch (data) {
           case 'group1':
@@ -301,7 +295,7 @@ const BattleScene = new Phaser.Class({
             creature1 = new Enemy(this, 200, 110, 'werewolf2', null, 'Werewolf', 70, 20);
             creature1.scale = 0.18;
 
-            creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 80, 30);
+            creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 70, 30);
             creature2.scale = 0.35;
 
             break;
@@ -317,11 +311,11 @@ const BattleScene = new Phaser.Class({
             break;
           case 'group5':
             
-            creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 70, 20);
+            creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 70, 25);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 80, 25);
+            creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 80, 30);
             creature2.flipX = true;
             creature2.scale = 0.3;
 
@@ -331,7 +325,7 @@ const BattleScene = new Phaser.Class({
             creature1 = new Enemy(this, 100, 160, 'wizard2', null, 'Wizard', 90, 30);
             creature1.scale = 0.5;
 
-            creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 60, 20);
+            creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 70, 25);
             creature2.scale = 0.7;
 
             break;
@@ -341,43 +335,43 @@ const BattleScene = new Phaser.Class({
             creature1.flipX = true;
             creature1.scale = 0.4;
 
-            creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 50, 20);
+            creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 70, 35);
             creature2.scale = 0.21;
 
             break;
           case 'group8':
             
-            creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 100, 40);
+            creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 100, 30);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 50, 10);
+            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 100, 20);
             creature2.scale = 0.35;
 
             break;
           case 'group9':
             
-            creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 70, 25);
+            creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 60, 35);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 60, 30);
+            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 35);
             creature2.scale = 0.19;
 
             break;
           case 'group10':
             
-            creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 50, 30);
+            creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 60, 40);
             creature1.flipX = true;
             creature1.scale = 0.38;
 
-            creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 80, 25);
+            creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 70, 30);
             creature2.scale = 0.9;
 
             break;
           case 'group11':
             
-            creature1 = new Enemy(this, 200, 200, 'witch2', null, 'Witch', 200, 30);
+            creature1 = new Enemy(this, 200, 200, 'witch2', null, 'Witch', 192, 45);
             creature1.scale = 0.7;
 
             break;
@@ -486,7 +480,7 @@ const BattleScene = new Phaser.Class({
       this.scene.start('GameOver');
     } else if (result === 'victory') {
       // setScore(this.getPunctuation());
-      console.log('battle finished');
+      console.log(`battle finished with punctuation ${this.getPunctuation()}`);
       this.scene.wake('World');
     }
   },
@@ -531,6 +525,7 @@ const BattleScene = new Phaser.Class({
         result = 10;
         break;
     }
+    return result;
   },
 });
 
