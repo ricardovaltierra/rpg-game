@@ -52,6 +52,10 @@ export default class WorldScene extends Phaser.Scene {
       }
     }
 
+    this.endHouse = this.physics.add.staticImage(120, 1260, 'grand-house');
+    this.endHouse.scale = 0.2;
+    this.endHouse.flipX = true;
+
     this.player = this.physics.add.sprite(80,70, 'player', 1);
     this.player.scale = 1.2;
     this.physics.world.bounds.width = 1218;
@@ -91,16 +95,50 @@ export default class WorldScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.physics.add.collider(this.player, this.trees);
+    // this.physics.add.collider(this.player, this.trees);
+    
+    const group1 = this.add.zone(200,100).setSize(50, 50);
+    group1.name = 'group1';
 
-    this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    for(var i = 0; i < 50; i++) {
-        var x = Phaser.Math.RND.between(0, 1218);
-        var y = Phaser.Math.RND.between(0, 1363);
-        // parameters are x, y, width, height
-        this.spawns.create(x, y, 20, 20);            
-    }        
-    this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
+    const group2 = this.add.zone(500,150).setSize(50, 100);
+    group2.name = 'group2';
+
+    const group3 = this.add.zone(850,110).setSize(100, 50);
+    group3.name = 'group3';
+
+    const group4 = this.add.zone(950,350).setSize(100, 100);
+    group4.name = 'group4';
+
+    const group5 = this.add.zone(550,480).setSize(150, 100);
+    group5.name = 'group5';
+
+    const group6 = this.add.zone(300,860).setSize(100, 150);
+    group6.name = 'group6';
+
+    const group7 = this.add.zone(750,850).setSize(150, 150);
+    group7.name = 'group7';
+
+    const group8 = this.add.zone(1000,1100).setSize(50, 150);
+    group8.name = 'group8';
+
+    const group9 = this.add.zone(750,1270).setSize(150, 50);
+    group9.name = 'group9';
+
+    const group10 = this.add.zone(490,1270).setSize(15, 185);
+    group10.name = 'group10';
+
+    const group11 = this.add.zone(300,1280).setSize(200, 200);
+    group11.name = 'group11';
+
+    [group1, group2, group3, group4, group5, group6, group7, group8, group9, group10, group11].map((group) => {
+      this.physics.world.enable(group, 0);
+      this.physics.add.overlap(this.player, group, this.onMeetEnemy, false, this);
+      return true;
+    });
+    
+    this.endZone  = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
+    this.endZone.create(120, 1260, 120, 120);
+    this.physics.add.overlap(this.player, this.endZone, this.onReachHouse, false, this);
 
     this.sys.events.on('wake', this.wake, this);
   }
@@ -124,6 +162,15 @@ export default class WorldScene extends Phaser.Scene {
     this.input.stopPropagation();
     // start battle 
     this.scene.switch('BattleScene');
+  }
+
+  onReachHouse(player, zone) {
+    zone.x = Phaser.Math.RND.between(0, 1218);
+    zone.y = Phaser.Math.RND.between(0, 1363);
+
+    this.cameras.main.fade(300);
+
+    this.input.stopPropagation();
   }
 
   update(time, delta) {

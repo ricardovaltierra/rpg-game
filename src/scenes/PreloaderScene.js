@@ -8,6 +8,7 @@ import MusicTheme from '../assets/TownTheme.mp3';
 // map
 import Tree from '../assets/map/tree.png';
 import MapPiece from '../assets/map/map-piece.jpg';
+import GrandPHouse from '../assets/map/grand-house.png';
 // battlefield
 import Landscape from '../assets/landscape.jpg';
 // heroes
@@ -118,7 +119,8 @@ export default class PreloaderScene extends Phaser.Scene {
     // map
     this.load.image('map-piece', MapPiece);
     this.load.image('tree', Tree);
-
+    this.load.image('grand-house', GrandPHouse);
+    
     // battlefield
     this.load.image('forest-landscape', Landscape);
     // player
