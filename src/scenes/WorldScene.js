@@ -95,7 +95,7 @@ export default class WorldScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    // this.physics.add.collider(this.player, this.trees);
+    this.physics.add.collider(this.player, this.trees);
     
     const group1 = this.add.zone(200,100).setSize(100, 100);
     group1.name = 'group1';
@@ -149,6 +149,26 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   wake() {
+    if (this.playerY < 153) {
+      this.player.x = 50;
+      this.player.y = 50;
+    } else if (this.playerY >= 153 && this.playerY < 328) {
+      this.player.x = 850;
+      this.player.y = 270;
+    } else if (this.playerY >= 328 && this.playerY < 488) {
+      this.player.x = 50;
+      this.player.y = 450;
+    } else if (this.playerY >= 488 && this.playerX > 125) {
+      this.player.x = 850;
+      this.player.y = 575;
+    } else if (this.playerY >= 485 && this.playerX <= 125) {
+      this.player.x = 100;
+      this.player.y = 575;
+    } else {
+      this.player.x = 50;
+      this.player.y = 50;
+    }
+
     this.cursors.left.reset();
     this.cursors.right.reset();
     this.cursors.up.reset();
@@ -169,10 +189,12 @@ export default class WorldScene extends Phaser.Scene {
     // start battle    
 
     this.scene.sleep('World');
+    console.log(`launching battle with enemy: ${creatureType.name} and y player position ${ this.player.y }`);
     this.scene.launch('BattleScene', { enemy: creatureType.name, y: this.player.y });
+
   }
 
-  onReachHouse(player, zone) {
+  onReachHouse() {
     zone.x = Phaser.Math.RND.between(0, 1218);
     zone.y = Phaser.Math.RND.between(0, 1363);
 

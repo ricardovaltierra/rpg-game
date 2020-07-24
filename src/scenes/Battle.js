@@ -1,6 +1,6 @@
 import 'phaser';
 
-var MenuItem = new Phaser.Class({
+const MenuItem = new Phaser.Class({
   Extends: Phaser.GameObjects.Text,
 
   initialize:
@@ -9,22 +9,22 @@ var MenuItem = new Phaser.Class({
       Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: '#ffffff', align: 'left', fontSize: 15 });
     },
 
-  select: function () {
+  select() {
     this.setColor('#f8ff38');
   },
 
-  deselect: function () {
+  deselect() {
     this.setColor('#ffffff');
   },
   // when the associated enemy or player unit is killed
-  unitKilled: function() {
+  unitKilled() {
     this.active = false;
     this.visible = false;
   } 
 
 });
 
-var Menu = new Phaser.Class({
+const Menu = new Phaser.Class({
   Extends: Phaser.GameObjects.Container,
 
   initialize:
@@ -37,38 +37,38 @@ var Menu = new Phaser.Class({
         this.y = y;        
         this.selected = false;
     },
-  addMenuItem: function (unit) {
-    var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
+  addMenuItem(unit) {
+    let menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
     this.menuItems.push(menuItem);
     this.add(menuItem);
     return menuItem;
   },
-  moveSelectionUp: function () {
+  moveSelectionUp() {
     this.menuItems[this.menuItemIndex].deselect();
     do {
-    this.menuItemIndex--;
+    this.menuItemIndex -= 1;
     if (this.menuItemIndex < 0)
       this.menuItemIndex = this.menuItems.length - 1;
     } while (!this.menuItems[this.menuItemIndex].active);
     this.menuItems[this.menuItemIndex].select();
   },
-  moveSelectionDown: function () {
+  moveSelectionDown() {
     this.menuItems[this.menuItemIndex].deselect();
     do {
-    this.menuItemIndex++;
+    this.menuItemIndex += 1;
     if (this.menuItemIndex >= this.menuItems.length)
       this.menuItemIndex = 0;
     } while (!this.menuItems[this.menuItemIndex].active);
     this.menuItems[this.menuItemIndex].select();
   },
   // select the menu as a whole and an element with index from it
-  select: function (index) {
+  select(index) {
     if (!index)
       index = 0;
     this.menuItems[this.menuItemIndex].deselect();
     this.menuItemIndex = index;
     while (!this.menuItems[this.menuItemIndex].active) {
-      this.menuItemIndex++;
+      this.menuItemIndex += 1;
       if(this.menuItemIndex >= this.menuItems.length)
         this.menuItemIndex = 0;
       if(this.menuItemIndex == index)
@@ -78,32 +78,32 @@ var Menu = new Phaser.Class({
     this.selected = true;
   },
   // deselect this menu
-  deselect: function () {
+  deselect() {
     this.menuItems[this.menuItemIndex].deselect();
     this.menuItemIndex = 0;
     this.selected = false;
   },
-  confirm: function () {
+  confirm() {
     // wen the player confirms his slection, do the action
   },
-  clear: function () {
-    for (var i = 0; i < this.menuItems.length; i++) {
+  clear() {
+    for (let i = 0; i < this.menuItems.length; i += 1) {
       this.menuItems[i].destroy();
     }
     this.menuItems.length = 0;
     this.menuItemIndex = 0;
   },
-  remap: function (units) {
+  remap(units) {
     this.clear();
-    for (var i = 0; i < units.length; i++) {
-      var unit = units[i];
+    for (let i = 0; i < units.length; i += 1) {
+      let unit = units[i];
       unit.setMenuItem(this.addMenuItem(unit.type));
     }
     this.menuItemIndex = 0;
   }
 });
 
-var HeroesMenu = new Phaser.Class({
+const HeroesMenu = new Phaser.Class({
   Extends: Menu,
 
   initialize:
@@ -113,7 +113,7 @@ var HeroesMenu = new Phaser.Class({
     }
 });
 
-var ActionsMenu = new Phaser.Class({
+const ActionsMenu = new Phaser.Class({
   Extends: Menu,
 
   initialize:
@@ -122,13 +122,13 @@ var ActionsMenu = new Phaser.Class({
       Menu.call(this, x, y, scene);
       this.addMenuItem('Attack');
     },
-  confirm: function () {
+  confirm() {
     this.scene.events.emit('SelectedAction');
   }
 
 });
 
-var EnemiesMenu = new Phaser.Class({
+const EnemiesMenu = new Phaser.Class({
   Extends: Menu,
 
   initialize:
@@ -136,35 +136,39 @@ var EnemiesMenu = new Phaser.Class({
     function EnemiesMenu(x, y, scene) {
       Menu.call(this, x, y, scene);
     },
-  confirm: function () {
+  confirm() {
     this.scene.events.emit("Enemy", this.menuItemIndex);
   }
 });
 
-var Unit = new Phaser.Class({
+const Unit = new Phaser.Class({
   Extends: Phaser.GameObjects.Sprite,
 
   initialize:
 
     function Unit(scene, x, y, texture, frame, type, hp, damage) {
-      Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
+      Phaser.GameObjects.Sprite.call(this, scene, x, y, texture)
       this.type = type;
-      this.maxHp = this.hp = hp;
+      this.hp = hp;
+      this.maxHp = this.hp;
       this.damage = damage; // default damage
       this.living = true;
       this.menuItem = null;
     },
   // we will use this to notify the menu item when the unit is dead
-  setMenuItem: function (item) {
+  setMenuItem(item) {
     this.menuItem = item;
   },
-  attack: function (target) {
+  attack(target) {
     if (target.living) {
+      console.log(`${target.type} living before attack: ${target.hp}`);
       target.takeDamage(this.damage);
+      console.log(`${target.type} get new living: ${target.hp} after attack`);
+      console.log('--------------------------------');
       this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
     }
   },
-  takeDamage: function (damage) {
+  takeDamage(damage) {
     this.hp -= damage;
     if (this.hp <= 0) {
       this.hp = 0;
@@ -176,7 +180,7 @@ var Unit = new Phaser.Class({
   }
 });
 
-var Enemy = new Phaser.Class({
+let Enemy = new Phaser.Class({
   Extends: Unit,
 
   initialize:
@@ -185,7 +189,7 @@ var Enemy = new Phaser.Class({
     }
 });
 
-var PlayerCharacter = new Phaser.Class({
+const PlayerCharacter = new Phaser.Class({
   Extends: Unit,
 
   initialize:
@@ -198,14 +202,14 @@ var PlayerCharacter = new Phaser.Class({
     }
 });
 
-var Message = new Phaser.Class({
+const Message = new Phaser.Class({
 
   Extends: Phaser.GameObjects.Container,
 
   initialize:
     function Message(scene, events) {
       Phaser.GameObjects.Container.call(this, scene, 160, 20);
-      var graphics = this.scene.add.graphics();
+      let graphics = this.scene.add.graphics();
       this.add(graphics);
       graphics.lineStyle(1, 0xffffff, 0.8);
       graphics.fillStyle(0x031f4c, 0.3);
@@ -217,20 +221,20 @@ var Message = new Phaser.Class({
       events.on("Message", this.showMessage, this);
       this.visible = false;
     },
-  showMessage: function (text) {
+  showMessage(text) {
     this.text.setText(text);
     this.visible = true;
     if (this.hideEvent)
       this.hideEvent.remove(false);
     this.hideEvent = this.scene.time.addEvent({ delay: 2000, callback: this.hideMessage, callbackScope: this });
   },
-  hideMessage: function () {
+  hideMessage() {
     this.hideEvent = null;
     this.visible = false;
   }
 });
 
-var BattleScene = new Phaser.Class({
+const BattleScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
@@ -241,36 +245,37 @@ var BattleScene = new Phaser.Class({
     },
 
   init(data) {
-    this.enemyData = data.enemy;
+    console.log('before set init');
+    this.dataEnemy = data.enemy;
     this.playerY = data.y;
+    console.log(`Enemy data: ${ this.data }, player position Y: ${ this.playerY }`);
   },
 
   create() {
-    
+    console.log('on create');
     this.add.image(400, 300, 'forest-landscape');
-    this.startBattle(this.enemyData);
+    this.startBattle(this.dataEnemy);
 
     // on wake event we call startBattle too
     this.sys.events.on('wake', this.startBattle, this); 
   },
   startBattle(data) {
     // player character - warrior
-        var knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
+        let knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
         knight1.scale = 0.45;
         knight1.flipX = false;
         this.add.existing(knight1);
     
         // player character - mage
-        var knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 80, 8);
+        let knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 100, 15);
         knight2.scale = 0.16;
         this.add.existing(knight2);
 
-        console.log(data);
-        console.log(this.playerY);
+        // console.log(data);
+        // console.log(this.playerY);
     
         let creature1;
         let creature2;
-
 
         switch (data) {
           case 'group1':
@@ -284,89 +289,89 @@ var BattleScene = new Phaser.Class({
             break;
           case 'group2':
             
-            creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 50, 3);
+            creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 70, 15);
             creature1.scale = 0.19;
 
-            creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 50, 3);
+            creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 80, 15);
             creature2.scale = 0.8;
 
             break;
           case 'group3':
             
-            creature1 = new Enemy(this, 200, 110, 'werewolf2', null, 'Werewolf', 50, 3);
+            creature1 = new Enemy(this, 200, 110, 'werewolf2', null, 'Werewolf', 70, 20);
             creature1.scale = 0.18;
 
-            creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 50, 3);
+            creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 80, 30);
             creature2.scale = 0.35;
 
             break;
           case 'group4':
             
-            creature1 = new Enemy(this, 200, 130, 'wizard1', null, 'Wizard', 50, 3);
+            creature1 = new Enemy(this, 200, 130, 'wizard1', null, 'Wizard', 90, 20);
             creature1.scale = 0.35;
 
-            creature2 = new Enemy(this, 120, 300, 'ghost2', null, 'Ghost', 50, 3);
+            creature2 = new Enemy(this, 120, 300, 'ghost2', null, 'Ghost', 70, 30);
             creature2.flipX = true;
             creature2.scale = 0.5;
 
             break;
           case 'group5':
             
-            creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 50, 3);
+            creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 70, 20);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 50, 3);
+            creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 80, 25);
             creature2.flipX = true;
             creature2.scale = 0.3;
 
             break;
           case 'group6':
             
-            creature1 = new Enemy(this, 100, 160, 'wizard2', null, 'Wizard', 50, 3);
+            creature1 = new Enemy(this, 100, 160, 'wizard2', null, 'Wizard', 90, 30);
             creature1.scale = 0.5;
 
-            creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 50, 3);
+            creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 60, 20);
             creature2.scale = 0.7;
 
             break;
           case 'group7':
             
-            creature1 = new Enemy(this, 200, 140, 'zombie2', null, 'Zombie', 50, 3);
+            creature1 = new Enemy(this, 200, 140, 'zombie2', null, 'Zombie', 80, 25);
             creature1.flipX = true;
             creature1.scale = 0.4;
 
-            creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 50, 3);
+            creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 50, 20);
             creature2.scale = 0.21;
 
             break;
           case 'group8':
             
-            creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 50, 3);
+            creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 100, 40);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 50, 3);
+            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 50, 10);
             creature2.scale = 0.35;
 
             break;
           case 'group9':
             
-            creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 50, 3);
+            creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 70, 25);
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 3);
+            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 60, 30);
             creature2.scale = 0.19;
 
             break;
           case 'group10':
             
-            creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 50, 3);
+            creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 50, 30);
             creature1.flipX = true;
             creature1.scale = 0.38;
 
-            creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 50, 3);
+            creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 80, 25);
             creature2.scale = 0.9;
 
             break;
@@ -405,13 +410,18 @@ var BattleScene = new Phaser.Class({
         // Run UI Scene at the same time
         this.scene.launch('UIScene');
       },
-  nextTurn: function () {
-    if(this.checkEndBattle()) {           
-      this.endBattle();
+  nextTurn() {
+    const battleStatus = this.checkEndBattle();
+    if (battleStatus.result === 'victory') {
+      this.endBattle('victory');
+      return;
+    }
+    if (battleStatus.result === 'gameOver') {
+      this.endBattle('gameOver');
       return;
     }
     do {
-      this.index++;
+      this.index += 1;
       // if there are no more units, we start again from the first one
       if (this.index >= this.units.length) {
         this.index = 0;
@@ -422,7 +432,7 @@ var BattleScene = new Phaser.Class({
       this.events.emit('PlayerSelect', this.index);
     } else { // else if its enemy unit
       // pick random hero
-      var r;
+      let r;
       do {
         r = Math.floor(Math.random() * this.heroes.length);
       } while(!this.heroes[r].living)
@@ -432,44 +442,99 @@ var BattleScene = new Phaser.Class({
       this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
   },
-  checkEndBattle: function() {        
-    var victory = true;
+  checkEndBattle() {        
+    let victory = true;
     // if all enemies are dead we have victory
-    for(var i = 0; i < this.enemies.length; i++) {
+    for(let i = 0; i < this.enemies.length; i += 1) {
         if(this.enemies[i].living)
             victory = false;
     }
-    var gameOver = true;
+    let gameOver = true;
     // if all heroes are dead we have game over
-    for(var i = 0; i < this.heroes.length; i++) {
+    for(let i = 0; i < this.heroes.length; i += 1) {
         if(this.heroes[i].living)
             gameOver = false;
     }
+
+    if (victory) return { result: 'victory' };
+    if (gameOver) return { result: 'gameOver'};
+
     return victory || gameOver;
   },
-  receivePlayerSelection: function (action, target) {
+  receivePlayerSelection(action, target) {
     if (action == 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
   },
-  endBattle: function() {       
+  endBattle(result) {       
     // clear state, remove sprites
-    this.heroes.length = 0;
-    this.enemies.length = 0;
-    for(var i = 0; i < this.units.length; i++) {
+    this.heroes = [];
+    this.enemies = [];
+    for(let i = 0; i < this.units.length; i += 1) {
         // link item
         this.units[i].destroy();            
     }
     this.units.length = 0;
+    this.index = -1;
     // sleep the UI
-    this.scene.sleep('UIScene');
-    // return to WorldScene and sleep current BattleScene
-    this.scene.switch('World');
+    this.scene.remove('UIScene');
+    this.scene.remove('BattleScene');
+
+    if(result === 'gameOver') {
+      this.scene.stop('World');
+      this.scene.start('GameOver');
+    } else if (result === 'victory') {
+      // setScore(this.getPunctuation());
+      console.log('battle finished');
+      this.scene.wake('World');
+    }
+  },
+  getPunctuation() {
+    let result = 0;
+
+    switch (this.dataEnemy) {
+      case 'group1':
+        result = 10;
+        break;
+      case 'group2':
+        result = 20;
+        break;
+      case 'group3':
+        result = 30;
+        break;
+      case 'group4':
+        result = 40;
+        break;
+      case 'group5':
+        result = 50;
+        break;
+      case 'group6':
+        result = 60;
+        break;
+      case 'group7':
+        result = 70;
+        break;
+      case 'group8':
+        result = 150;
+        break;
+      case 'group9':
+        result = 70;
+        break;
+      case 'group10':
+        result = 60;
+        break;
+      case 'group11':
+        result = 200;
+        break;
+      default:
+        result = 10;
+        break;
+    }
   },
 });
 
-var UIScene = new Phaser.Class({
+const UIScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
 
@@ -479,7 +544,7 @@ var UIScene = new Phaser.Class({
       Phaser.Scene.call(this, { key: 'UIScene' });
     },
 
-    create: function ()
+    create()
     {    
         // draw some background for the menu
         this.graphics = this.add.graphics();
@@ -532,39 +597,39 @@ var UIScene = new Phaser.Class({
         
         this.createMenu();     
     },
-  createMenu: function() {
+  createMenu() {
     // map hero menu items to heroes
     this.remapHeroes();
     // map enemies menu items to enemies
     this.remapEnemies();
     // first move
-    this.battleScene.nextTurn(); 
+    this.battleScene.nextTurn();
   },
-  onEnemy: function (index) {
+  onEnemy(index) {
     this.heroesMenu.deselect();
     this.actionsMenu.deselect();
     this.enemiesMenu.deselect();
     this.currentMenu = null;
     this.battleScene.receivePlayerSelection('attack', index);
   },
-  onPlayerSelect: function (id) {
+  onPlayerSelect(id) {
     this.heroesMenu.select(id);
     this.actionsMenu.select(0);
     this.currentMenu = this.actionsMenu;
   },
-  onSelectedAction: function () {
+  onSelectedAction() {
     this.currentMenu = this.enemiesMenu;
     this.enemiesMenu.select(0);
   },
-  remapHeroes: function () {
-    var heroes = this.battleScene.heroes;
+  remapHeroes() {
+    let heroes = this.battleScene.heroes;
     this.heroesMenu.remap(heroes);
   },
-  remapEnemies: function () {
-    var enemies = this.battleScene.enemies;
+  remapEnemies() {
+    let enemies = this.battleScene.enemies;
     this.enemiesMenu.remap(enemies);
   },
-  onKeyInput: function (event) {
+  onKeyInput(event) {
     if (this.currentMenu && this.currentMenu.selected) {
       if (event.code === "ArrowUp") {
         this.currentMenu.moveSelectionUp();
