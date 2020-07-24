@@ -1,4 +1,5 @@
 import 'phaser';
+import getPunctuation from '../api/punctuation';
 import { BattleScene, UIScene } from './Battle';
 
 export default class WorldScene extends Phaser.Scene {
@@ -146,6 +147,9 @@ export default class WorldScene extends Phaser.Scene {
 
     // this.overlapTrees = this.physics.add.overlap(this.player, this.trees, this.onMeetEnemy, false, this);
 
+    this.textPunctuation = this.add.text(210, 157, `Punctuation: ${ getPunctuation() }`, { fontSize: '14px', fill: '#fff'});
+    this.textPunctuation.setScrollFactor(0, 0);
+
     this.sys.events.on('wake', this.wake, this);
   }
 
@@ -169,6 +173,8 @@ export default class WorldScene extends Phaser.Scene {
     //   this.player.x = 50;
     //   this.player.y = 50;
     // }
+
+    this.textPunctuation.setText(`Punctuation: ${ getPunctuation() }`);
 
     this.cursors.left.reset();
     this.cursors.right.reset();

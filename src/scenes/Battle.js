@@ -1,4 +1,5 @@
 import 'phaser';
+import { setPunctuation } from '../api/punctuation';
 
 const MenuItem = new Phaser.Class({
   Extends: Phaser.GameObjects.Text,
@@ -479,7 +480,7 @@ const BattleScene = new Phaser.Class({
       this.scene.stop('World');
       this.scene.start('GameOver');
     } else if (result === 'victory') {
-      // setScore(this.getPunctuation());
+      setPunctuation(this.getPunctuation());
       console.log(`battle finished with punctuation ${this.getPunctuation()}`);
       this.scene.wake('World');
     }
