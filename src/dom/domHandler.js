@@ -1,11 +1,10 @@
-import { setPlayer, getPlayer } from '../api/player';
+import { setPlayer } from '../api/player';
 import initGame  from '../index';
 import { createElement, getElement, appendChild, appendChilds, appendToBody, setClickListener, setEnterListener } from './elementsHander';
 
 export function domInit() {
   
   const inputWrapper = createElement('div', 'input-wrapper', '', '' );
-  // const label = createElement('div', 'input-text', '', '');
   const checkBegin = createElement('input', 'checkbox', 'c-checkbox', '');
   const formWrapper = createElement('div', '', 'c-formContainer', '');
   const formPlayer = createElement('form', '', 'c-form', '');

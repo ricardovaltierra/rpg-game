@@ -97,7 +97,7 @@ export default class WorldScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    // this.physics.add.collider(this.player, this.trees);
+    this.physics.add.collider(this.player, this.trees);
     
     const group1 = this.add.zone(200,100).setSize(100, 100);
     group1.name = 'group1';
@@ -194,21 +194,21 @@ export default class WorldScene extends Phaser.Scene {
     // Horizontal movement
     if (this.cursors.left.isDown)
     {
-      this.player.body.setVelocityX(-180);
+      this.player.body.setVelocityX(-100);
     }
     else if (this.cursors.right.isDown)
     {
-      this.player.body.setVelocityX(180);
+      this.player.body.setVelocityX(100);
     }
 
     // Vertical movement
     if (this.cursors.up.isDown)
     {
-      this.player.body.setVelocityY(-180);
+      this.player.body.setVelocityY(-100);
     }
     else if (this.cursors.down.isDown)
     {
-      this.player.body.setVelocityY(180);
+      this.player.body.setVelocityY(100);
     }
 
     if (this.cursors.left.isDown)

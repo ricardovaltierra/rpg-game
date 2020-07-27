@@ -434,8 +434,7 @@ const BattleScene = new Phaser.Class({
       // call the enemy's attack function 
       this.units[this.index].attack(this.heroes[r]);
       // add timer for the next turn, so will have smooth gameplay
-      // this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
-      this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
+      this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
   },
   checkEndBattle() {        
@@ -461,8 +460,7 @@ const BattleScene = new Phaser.Class({
     if (action == 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
-    // this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
-    this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
+    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
   },
   endBattle(result) {       
     // clear state, remove sprites
