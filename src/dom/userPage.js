@@ -1,6 +1,0 @@
-import start from '../index';
-
-
-
-
-
