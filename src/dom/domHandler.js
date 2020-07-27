@@ -24,7 +24,7 @@ export function domInit() {
   labelBegin.setAttribute('data-title', 'Begin');
 
   setClickListener(enterGame, checkForm);
-  // setEnterListener(player, checkForm);
+  setEnterListener(player, checkForm);
   appendChild(labelButton, enterGame);
   appendChild(formPlayer, player);
   appendChild(formPlayer, labelButton);

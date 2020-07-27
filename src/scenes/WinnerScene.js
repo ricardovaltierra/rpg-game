@@ -27,12 +27,6 @@ export default class WinnerScene extends Phaser.Scene {
     this.punctuation = this.add.text(0,0, `Punctuation ${getPunctuation()}`, { fontSize: '30px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
-    this.formUtil = newFormUtil({ scene:this, rows:11, cols:11 });
-    this.formUtil.showNumbers();
-    this.formUtil.scaleToGameW("player-input", .4);
-    this.formUtil.placeElementAt(60, "player-input");
-    this.formUtil.showElement("player-input");
-
     Phaser.Display.Align.In.Center(this.title, this.zone);
     Phaser.Display.Align.In.Center(this.messageText, this.zone);
     Phaser.Display.Align.In.Center(this.punctuation, this.zone);

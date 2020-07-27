@@ -1,6 +1,15 @@
 import 'phaser';
 import config from '../config/config';
+import Button from '../objects/Button';
+import { getPunctuations } from '../api/punctuationAPI';
 
+function identPunctuation(size) {
+  let dynamicSpacing = '';
+  for (let i = 0; i < size; i++) {
+    dynamicSpacing += ' ';
+  }
+  return dynamicSpacing;
+}
 
 export default class LeaderboardScene extends Phaser.Scene {
   constructor () {
@@ -8,43 +17,56 @@ export default class LeaderboardScene extends Phaser.Scene {
   }
 
   create () {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Placeholder', { fontSize: '26px', fill: '#fff' });
+    this.logo = this.add.image(342, 5, 'logo').setOrigin(0, 0);
+    this.logo.scale = 0.5;
+
+    this.title = this.add.text(0, 0, 'Leaderboard', { fontSize: '32px', fontStyle: 'bold', fill: '#fff' });
     this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
-      this.creditsText,
+      this.title,
       this.zone
     );
 
-    Phaser.Display.Align.In.Center(
-      this.madeByText,
-      this.zone
-    );
+    this.title.displayOriginY = 135;
 
-    this.madeByText.setY(1000);
+    getPunctuations().then(punctuations => {
+      const buffer = [];
+      let tempPlayer = '';
 
-    this.creditsTween = this.tweens.add({
-      targets: this.creditsText,
-      y: -100,
-      ease: 'Power1',
-      duration: 3000,
-      delay: 1000,
-      onComplete: function () {
-        this.destroy;
-      }
+      punctuations.map((user, i) => {
+        tempPlayer = `# ${(i + 1).toString()} - ${user[0]}`;
+        console.log(tempPlayer.length);
+
+        buffer.push(
+          `${tempPlayer} ${identPunctuation(66 - tempPlayer.length)} ${user[1].toString()}`
+        );
+
+        return true;
+      });
+
+      const frame = this.add.graphics();
+      frame.fillStyle(0x000000, 1);
+      frame.fillRect(35, 193, 728, 250);
+
+
+      const display = new Phaser.Display.Masks.GeometryMask(this, frame);
+      
+
+      const board = this.add.text(60, 210, buffer, { wordWrap: { width: 710 }, fill: '#fff' }).setOrigin(0);
+
+      board.setMask(display);
+
+      const zone = this.add.zone(35, 190, 728, 256).setOrigin(0).setInteractive();
+
+      zone.on('pointermove', (pointer) => {
+        if (pointer.isDown) {
+          board.y += (pointer.velocity.y / 10);
+          board.y = Phaser.Math.Clamp(board.y, -400, 300);
+        }
+      });
     });
-     
-    this.madeByTween = this.tweens.add({
-      targets: this.madeByText,
-      y: -300,
-      ease: 'Power1',
-      duration: 8000,
-      delay: 1000,
-      onComplete: function () {
-        this.madeByTween.destroy;
-        this.scene.start('Title');
-      }.bind(this)
-    });
+
+    this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
   }
 };

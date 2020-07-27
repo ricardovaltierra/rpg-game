@@ -45,7 +45,7 @@ export const postPunctuation = async (name, score) => {
 const sortResults = (data) => {
   const arr = [];
 
-  for (let i = 0; i < input.length; i += 1) {
+  for (let i = 0; i < data.length; i += 1) {
     arr.push([data[i].user, data[i].score]);
   }
 
