@@ -35,20 +35,6 @@ $light-coral: #F08080;
             transform: scale(1);
         }
     }
-
-    &:not(:checked),
-    &:checked {
-        + .c-formContainer .c-form__input:required:valid ~ .c-form__toggle::before {
-            content: 'Thank You! \1F60A';
-        }
-    }
-
-    &:not(:checked) + .c-formContainer {
-        .c-form__input:required:valid ~ .c-form__toggle {
-            pointer-events: none;
-            cursor: default;
-        }
-    }
 }
 
 .c-formContainer,
@@ -122,18 +108,6 @@ $light-coral: #F08080;
 
     &::placeholder {
         color: currentColor;
-    }
-
-    &:required:valid {
-        color: $white;
-
-        + .c-form__buttonLabel {
-            color: $red;
-
-            &::before {
-                pointer-events: initial;
-            }
-        }
     }
 }
 

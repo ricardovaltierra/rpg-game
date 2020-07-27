@@ -52,7 +52,6 @@ export default class LeaderboardScene extends Phaser.Scene {
 
       const display = new Phaser.Display.Masks.GeometryMask(this, frame);
       
-
       const board = this.add.text(60, 210, buffer, { wordWrap: { width: 710 }, fill: '#fff' }).setOrigin(0);
 
       board.setMask(display);
