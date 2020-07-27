@@ -175,7 +175,6 @@ export default class WorldScene extends Phaser.Scene {
     // start battle    
 
     this.scene.sleep('World');
-  
     this.scene.launch('BattleScene', { enemy: creatureType.name, y: this.player.y });
 
   }
@@ -195,21 +194,21 @@ export default class WorldScene extends Phaser.Scene {
     // Horizontal movement
     if (this.cursors.left.isDown)
     {
-      this.player.body.setVelocityX(-250);
+      this.player.body.setVelocityX(-180);
     }
     else if (this.cursors.right.isDown)
     {
-      this.player.body.setVelocityX(250);
+      this.player.body.setVelocityX(180);
     }
 
     // Vertical movement
     if (this.cursors.up.isDown)
     {
-      this.player.body.setVelocityY(-250);
+      this.player.body.setVelocityY(-180);
     }
     else if (this.cursors.down.isDown)
     {
-      this.player.body.setVelocityY(250);
+      this.player.body.setVelocityY(180);
     }
 
     if (this.cursors.left.isDown)

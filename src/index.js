@@ -2,6 +2,8 @@ import 'phaser';
 import './assets/css/style.css';
 import config from './config/config';
 import Model from './objects/Model';
+import { setPlayer } from './api/player';
+import { createElement, getElement, appendChilds, appendToBody, setClickListener } from '../src/dom/elementsHander';
 import BootScene from './scenes/BootScene';
 import PreloaderScene from './scenes/PreloaderScene';
 import TitleScene from './scenes/TitleScene';
@@ -29,10 +31,32 @@ class Game extends Phaser.Game {
     this.scene.add('GameOver', GameOverScene);
     this.scene.add('Winner', WinnerScene);
     this.scene.add('World', WorldScene);
-    // this.scene.add('BattleScene', BattleScene);
-    // this.scene.add('UIScene', UIScene);
     this.scene.start('Boot');
   }
 }
 
-window.game = new Game();
+const inputWrapper = createElement('div', 'input-wrapper', '', '' );
+const label = createElement('div', 'input-text', '', '');
+const player = createElement('input', 'player-input', '', '');
+const enterGame = createElement('button', 'submit-button', '', 'Enter');
+
+player.placeholder = 'Please enter your name';
+
+setClickListener(enterGame, checkForm);
+appendChilds(inputWrapper, [label, player, enterGame]);
+appendToBody(inputWrapper);
+
+
+function checkForm() {
+  let playerName = getElement('player-input');
+  if (playerName.value) {
+     let inputWrapper = getElement('input-wrapper');
+     document.body.removeChild(inputWrapper);
+     setPlayer(playerName.value);
+     window.game = new Game();
+    } else {
+     console.log('empty');
+     playerName.classList.add('error');
+     setTimeout(() => playerName.classList.remove('error'), 4000);
+    }
+}

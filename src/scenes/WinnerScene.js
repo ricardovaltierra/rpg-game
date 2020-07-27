@@ -2,8 +2,8 @@ import 'phaser';
 import config from '../config/config';
 import Button from '../objects/Button';
 import { getPunctuation, resetPunctuation } from '../api/punctuation';
-// import { postPunctuation } from '../api/punctuationApi';
-// import { getPlayer } from '../api/user';
+import { postPunctuation } from '../api/punctuationAPI';
+import { getPlayer } from '../api/player';
 
 
 export default class WinnerScene extends Phaser.Scene {
@@ -27,6 +27,12 @@ export default class WinnerScene extends Phaser.Scene {
     this.punctuation = this.add.text(0,0, `Punctuation ${getPunctuation()}`, { fontSize: '30px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
+    this.formUtil = newFormUtil({ scene:this, rows:11, cols:11 });
+    this.formUtil.showNumbers();
+    this.formUtil.scaleToGameW("player-input", .4);
+    this.formUtil.placeElementAt(60, "player-input");
+    this.formUtil.showElement("player-input");
+
     Phaser.Display.Align.In.Center(this.title, this.zone);
     Phaser.Display.Align.In.Center(this.messageText, this.zone);
     Phaser.Display.Align.In.Center(this.punctuation, this.zone);
@@ -35,10 +41,10 @@ export default class WinnerScene extends Phaser.Scene {
     this.messageText.displayOriginY = -15;
     this.punctuation.displayOriginY = -80;
 
-    // const player = getPlayer();
-    // const finalPunctuation = getPunctuation();
+    const player = getPlayer();
+    const punctuation = getPunctuation();
 
-    // postPunctuation(player, finalPunctuation);
+    postPunctuation(player, punctuation);
 
     this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
     resetPunctuation();

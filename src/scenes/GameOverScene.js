@@ -2,8 +2,8 @@ import 'phaser';
 import config from '../config/config';
 import Button from '../objects/Button';
 import { getPunctuation, resetPunctuation } from '../api/punctuation';
-// import { postPunctuation } from '../api/punctuationApi';
-// import { getPlayer } from '../api/user';
+import { postPunctuation } from '../api/punctuationAPI';
+import { getPlayer } from '../api/player';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor () {
@@ -27,10 +27,10 @@ export default class GameOverScene extends Phaser.Scene {
     this.title.displayOriginY = 50;
     this.punctuation.displayOriginY = -50;
 
-    // const player = getPlayer();
-    // const finalPunctuation = getPunctuation();
+    const player = getPlayer();
+    const punctuation = getPunctuation();
 
-    // postPunctuation(player, finalPunctuation);
+    postPunctuation(player, punctuation);
 
     this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
     resetPunctuation();

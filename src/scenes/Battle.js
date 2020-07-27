@@ -275,19 +275,19 @@ const BattleScene = new Phaser.Class({
         switch (data) {
           case 'group1':
             
-            creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
+            creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 15);
             creature1.scale = 0.7;
 
-            creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
+            creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 15);
             creature2.scale = 0.9;
 
             break;
           case 'group2':
             
-            creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 70, 15);
+            creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 70, 25);
             creature1.scale = 0.19;
 
-            creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 80, 15);
+            creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 80, 25);
             creature2.scale = 0.8;
 
             break;
@@ -346,7 +346,7 @@ const BattleScene = new Phaser.Class({
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 100, 20);
+            creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 100, 15);
             creature2.scale = 0.35;
 
             break;
@@ -356,7 +356,7 @@ const BattleScene = new Phaser.Class({
             creature1.flipX = true;
             creature1.scale = 0.25;
 
-            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 35);
+            creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 35); 
             creature2.scale = 0.19;
 
             break;
@@ -434,7 +434,8 @@ const BattleScene = new Phaser.Class({
       // call the enemy's attack function 
       this.units[this.index].attack(this.heroes[r]);
       // add timer for the next turn, so will have smooth gameplay
-      this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+      // this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+      this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
     }
   },
   checkEndBattle() {        
@@ -460,7 +461,8 @@ const BattleScene = new Phaser.Class({
     if (action == 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
-    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    // this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
   },
   endBattle(result) {       
     // clear state, remove sprites
@@ -473,6 +475,8 @@ const BattleScene = new Phaser.Class({
     this.units.length = 0;
     this.index = -1;
     // sleep the UI
+    this.scene.stop('UIScene');
+    this.scene.stop('BattleScene');
     this.scene.remove('UIScene');
     this.scene.remove('BattleScene');
 
@@ -569,7 +573,7 @@ const UIScene = new Phaser.Class({
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
                 
-        this.battleScene = this.scene.get("BattleScene");                                
+        this.battleScene = this.scene.get('BattleScene');                                
         
         // listen for keyboard events
         this.input.keyboard.on("keydown", this.onKeyInput, this);   
@@ -577,8 +581,6 @@ const UIScene = new Phaser.Class({
         // when its player unit turn to move
         this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
         
-        // when the action on the menu is selected
-        // for now we have only one action so we dont send and action id
         this.events.on("SelectedAction", this.onSelectedAction, this);
         
         // an enemy is selected

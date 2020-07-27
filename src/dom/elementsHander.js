@@ -1,7 +1,8 @@
-export function createElement(type, inner = '', classLst = '') {
+export function createElement(type = 'div', id = null, classLst = null, inner = '') {
   const elem = document.createElement(type);
+  if (id) elem.id = id;
+  if (classLst) elem.classList.add(classLst);
   elem.innerHTML = inner;
-  elem.classList.add(classLst);
   return elem;
 }
 
@@ -40,4 +41,12 @@ export function setValue(elem, val) {
 
 export function appendChild(elem, child) {
   elem.appendChild(child);
+}
+
+export function appendToBody(child) {
+  document.body.appendChild(child);
+}
+
+export function appendChilds(elem, childs) {
+  childs.forEach(child => elem.appendChild(child));
 }
