@@ -5,8 +5,6 @@
 import 'phaser';
 import config from '../config/config';
 import Button from '../objects/Button';
-import { load } from '../api/punctuationAPI';
-
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {

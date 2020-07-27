@@ -10,7 +10,7 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   create() {
-    const map = this.add.tileSprite(118, 113, 2300, 2600, 'map-piece');
+    this.add.tileSprite(118, 113, 2300, 2600, 'map-piece');
 
     this.trees = this.physics.add.staticGroup();
 
@@ -131,7 +131,12 @@ export default class WorldScene extends Phaser.Scene {
     const group11 = this.add.zone(300, 1280).setSize(150, 150);
     group11.name = 'group11';
 
-    [group1, group2, group3, group4, group5, group6, group7, group8, group9, group10, group11].map((group) => {
+    [group1, group2,
+      group3, group4,
+      group5, group6,
+      group7, group8,
+      group9, group10,
+      group11].map((group) => {
       this.physics.world.enable(group, 0);
       this.physics.add.overlap(this.player, group, this.onMeetEnemy, false, this);
       return true;
@@ -186,7 +191,7 @@ export default class WorldScene extends Phaser.Scene {
   }
 
   update() {
-	  this.player.body.setVelocity(0);
+    this.player.body.setVelocity(0);
 
     // Horizontal movement
     if (this.cursors.left.isDown) {

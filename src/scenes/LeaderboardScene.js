@@ -8,7 +8,7 @@ import { getPunctuations } from '../api/punctuationAPI';
 
 function identPunctuation(size) {
   let dynamicSpacing = '';
-  for (let i = 0; i < size; i++) {
+  for (let i = 0; i < size; i += 1) {
     dynamicSpacing += ' ';
   }
   return dynamicSpacing;

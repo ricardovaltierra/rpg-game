@@ -3,8 +3,24 @@
 import { setPlayer } from '../api/player';
 import initGame from '../index';
 import {
-  createElement, getElement, appendChild, appendChilds, appendToBody, setClickListener, setEnterListener,
+  createElement, getElement,
+  appendChild, appendChilds,
+  appendToBody, setClickListener,
+  setEnterListener,
 } from './elementsHander';
+
+export function checkForm() {
+  const playerName = getElement('player-input');
+  if (playerName.value) {
+    const inputWrapper = getElement('input-wrapper');
+    document.body.removeChild(inputWrapper);
+    setPlayer(playerName.value);
+    initGame();
+  } else {
+    playerName.classList.add('error');
+    setTimeout(() => playerName.classList.remove('error'), 4000);
+  }
+}
 
 export function domInit() {
   const inputWrapper = createElement('div', 'input-wrapper', '', '');
@@ -34,17 +50,4 @@ export function domInit() {
   appendChild(formWrapper, formPlayer);
   appendChilds(inputWrapper, [checkBegin, formWrapper]);
   appendToBody(inputWrapper);
-}
-
-export function checkForm() {
-  const playerName = getElement('player-input');
-  if (playerName.value) {
-    const inputWrapper = getElement('input-wrapper');
-    document.body.removeChild(inputWrapper);
-    setPlayer(playerName.value);
-    initGame();
-  } else {
-    playerName.classList.add('error');
-    setTimeout(() => playerName.classList.remove('error'), 4000);
-  }
 }

@@ -24,7 +24,6 @@ export default class CreditsScene extends Phaser.Scene {
 
     const text = [this.title, this.madeByText, this.capstone, this.webpack, this.description,
       this.microverse, this.phaser, this.gamedev, this.gameart, this.imageart];
-    const tweens = [];
 
     for (let i = 0; i < text.length; i += 1) {
       Phaser.Display.Align.In.Center(
@@ -41,7 +40,7 @@ export default class CreditsScene extends Phaser.Scene {
           duration: 3000,
           delay: 5000,
           onComplete() {
-            this.destroy;
+            this.destroy; // eslint-disable-line no-unused-expressions
           },
         });
       } else {
@@ -58,7 +57,7 @@ export default class CreditsScene extends Phaser.Scene {
           duration: 3000,
           delay: 5000 + (i * 1000),
           onComplete: function () {
-            this.tweens[i].destroy;
+            this.tweens[i].destroy; // eslint-disable-line no-unused-expressions
           }.bind(this),
         });
       } else {
@@ -69,7 +68,7 @@ export default class CreditsScene extends Phaser.Scene {
           duration: 3000,
           delay: 5000 + (i * 1000),
           onComplete: function () {
-            this.tweens[i].destroy;
+            this.tweens[i].destroy; // eslint-disable-line no-unused-expressions
             this.scene.start('Title');
           }.bind(this),
         });

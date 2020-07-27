@@ -41,7 +41,7 @@ export default class InstructionsScene extends Phaser.Scene {
         this.add.text(320, 50 + (i * 65), content[i], {
           fontFamily: 'Arial', fontSize: '20px', fontStyle: 'bold', color: '#fff',
         });
-      } else if (i == 1) {
+      } else if (i === 1) {
         this.add.text(135, 10 + (i * 68), content[i], { fontFamily: 'Serif', color: '#fff', align: 'center' });
       } else {
         this.add.text(155, 10 + (i * 68), content[i], { fontFamily: 'Serif', color: '#fff', align: 'center' });

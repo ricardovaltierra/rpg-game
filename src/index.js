@@ -17,7 +17,6 @@ import LeaderboardScene from './scenes/LeaderboardScene';
 import GameOverScene from './scenes/GameOverScene';
 import WinnerScene from './scenes/WinnerScene';
 import WorldScene from './scenes/WorldScene';
-import { BattleScene, UIScene } from './scenes/Battle';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -40,4 +39,4 @@ class Game extends Phaser.Game {
 
 domInit();
 
-export default () => window.game = new Game();
+export default () => { window.game = new Game(); };

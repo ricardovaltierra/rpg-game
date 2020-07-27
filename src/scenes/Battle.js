@@ -33,7 +33,7 @@ const Menu = new Phaser.Class({
 
   initialize:
 
-    function Menu(x, y, scene, heroes) {
+    function Menu(x, y, scene) {
       Phaser.GameObjects.Container.call(this, scene, x, y);
       this.menuItems = [];
       this.menuItemIndex = 0;
@@ -71,7 +71,7 @@ const Menu = new Phaser.Class({
     while (!this.menuItems[this.menuItemIndex].active) {
       this.menuItemIndex += 1;
       if (this.menuItemIndex >= this.menuItems.length) this.menuItemIndex = 0;
-      if (this.menuItemIndex == index) return;
+      if (this.menuItemIndex === index) return;
     }
     this.menuItems[this.menuItemIndex].select();
     this.selected = true;
@@ -227,7 +227,13 @@ const Message = new Phaser.Class({
     this.text.setText(text);
     this.visible = true;
     if (this.hideEvent) this.hideEvent.remove(false);
-    this.hideEvent = this.scene.time.addEvent({ delay: 2000, callback: this.hideMessage, callbackScope: this });
+    this.hideEvent = this.scene.time.addEvent(
+      {
+        delay: 2000,
+        callback: this.hideMessage,
+        callbackScope: this,
+      },
+    );
   },
   hideMessage() {
     this.hideEvent = null;
@@ -455,7 +461,7 @@ const BattleScene = new Phaser.Class({
     return victory || gameOver;
   },
   receivePlayerSelection(action, target) {
-    if (action == 'attack') {
+    if (action === 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
@@ -629,8 +635,6 @@ const UIScene = new Phaser.Class({
         this.currentMenu.moveSelectionUp();
       } else if (event.code === 'ArrowDown') {
         this.currentMenu.moveSelectionDown();
-      } else if (event.code === 'ArrowRight' || event.code === 'Shift') {
-
       } else if (event.code === 'Space' || event.code === 'ArrowLeft') {
         this.currentMenu.confirm();
       }
