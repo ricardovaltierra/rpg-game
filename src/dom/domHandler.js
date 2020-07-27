@@ -1,20 +1,36 @@
 import { setPlayer, getPlayer } from '../api/player';
 import initGame  from '../index';
-import { createElement, getElement, appendChilds, appendToBody, setClickListener, setEnterListener } from './elementsHander';
+import { createElement, getElement, appendChild, appendChilds, appendToBody, setClickListener, setEnterListener } from './elementsHander';
 
 export function domInit() {
   
-  const beginButton = createElement('checkbox', 'checkbox', 'c-checkbox', '')
   const inputWrapper = createElement('div', 'input-wrapper', '', '' );
-  const label = createElement('div', 'input-text', '', '');
-  const player = createElement('input', 'player-input', '', '');
-  const enterGame = createElement('button', 'submit-button', '', 'Enter');
+  // const label = createElement('div', 'input-text', '', '');
+  const checkBegin = createElement('input', 'checkbox', 'c-checkbox', '');
+  const formWrapper = createElement('div', '', 'c-formContainer', '');
+  const formPlayer = createElement('form', '', 'c-form', '');
+  const player = createElement('input', 'player-input', 'c-form__input', '');
+  const labelButton = createElement('label', '', 'c-form__buttonLabel', '');
+  const enterGame = createElement('button', 'submit-button', 'c-form__button', 'Enter');
+  const labelBegin = createElement('label', '', 'c-form__toggle');
 
-  player.placeholder = 'Please enter your name';
+  checkBegin.type = 'checkbox';
+  formPlayer.setAttribute('action', '');
+  player.type = 'text';
+  player.placeholder = 'My name';
+  labelButton.htmlFor = 'checkbox';
+  enterGame.type = 'button';
+  labelBegin.htmlFor = 'checkbox';
+  labelBegin.setAttribute('data-title', 'Begin');
 
   setClickListener(enterGame, checkForm);
-  setEnterListener(player, checkForm);
-  appendChilds(inputWrapper, [label, player, enterGame]);
+  // setEnterListener(player, checkForm);
+  appendChild(labelButton, enterGame);
+  appendChild(formPlayer, player);
+  appendChild(formPlayer, labelButton);
+  appendChild(formPlayer, labelBegin);
+  appendChild(formWrapper, formPlayer);
+  appendChilds(inputWrapper, [checkBegin, formWrapper]);
   appendToBody(inputWrapper);
 }
 

@@ -1,5 +1,6 @@
 import 'phaser';
-import './assets/css/style.scss';
+import './assets/scss/style.scss';
+import './assets/scss/beginButton.scss';
 import config from './config/config';
 import Model from './objects/Model';
 import { domInit } from './dom/domHandler';
