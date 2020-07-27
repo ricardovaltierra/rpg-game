@@ -47,6 +47,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "phaser": "^3.20.1"
+    "node-fetch": "^2.6.0",
+    "phaser": "^3.22.0",
+    "regenerator-runtime": "^0.13.7"
   }
 }
