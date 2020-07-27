@@ -3,7 +3,7 @@ import './assets/css/style.css';
 import config from './config/config';
 import Model from './objects/Model';
 import { setPlayer } from './api/player';
-import { createElement, getElement, appendChilds, appendToBody, setClickListener } from '../src/dom/elementsHander';
+import { createElement, getElement, appendChilds, appendToBody, setClickListener, setEnterListener } from '../src/dom/elementsHander';
 import BootScene from './scenes/BootScene';
 import PreloaderScene from './scenes/PreloaderScene';
 import TitleScene from './scenes/TitleScene';
@@ -43,6 +43,7 @@ const enterGame = createElement('button', 'submit-button', '', 'Enter');
 player.placeholder = 'Please enter your name';
 
 setClickListener(enterGame, checkForm);
+setEnterListener(player, checkForm);
 appendChilds(inputWrapper, [label, player, enterGame]);
 appendToBody(inputWrapper);
 

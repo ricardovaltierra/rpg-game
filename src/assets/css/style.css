@@ -16,3 +16,9 @@ canvas {
 .error {
   border: 2px solid maroon;
 }
+#input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+}
