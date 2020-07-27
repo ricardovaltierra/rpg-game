@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable class-methods-use-this */
+
 import 'phaser';
 import config from '../config/config';
 import Button from '../objects/Button';
@@ -12,20 +15,20 @@ function identPunctuation(size) {
 }
 
 export default class LeaderboardScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Leaderboard');
   }
 
-  create () {
+  create() {
     this.logo = this.add.image(342, 5, 'logo').setOrigin(0, 0);
     this.logo.scale = 0.5;
 
     this.title = this.add.text(0, 0, 'Leaderboard', { fontSize: '32px', fontStyle: 'bold', fill: '#fff' });
-    this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
+    this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
       this.title,
-      this.zone
+      this.zone,
     );
 
     this.title.displayOriginY = 135;
@@ -33,13 +36,14 @@ export default class LeaderboardScene extends Phaser.Scene {
     getPunctuations().then(punctuations => {
       const buffer = [];
       let tempPlayer = '';
+      let tempPunctuation = '';
 
       punctuations.map((user, i) => {
         tempPlayer = `# ${(i + 1).toString()} - ${user[0]}`;
-        console.log(tempPlayer.length);
+        tempPunctuation = user[1].toString();
 
         buffer.push(
-          `${tempPlayer} ${identPunctuation(66 - tempPlayer.length)} ${user[1].toString()}`
+          `${tempPlayer} ${identPunctuation(66 - tempPlayer.length - tempPunctuation.length)} ${tempPunctuation}`,
         );
 
         return true;
@@ -51,7 +55,7 @@ export default class LeaderboardScene extends Phaser.Scene {
 
 
       const display = new Phaser.Display.Masks.GeometryMask(this, frame);
-      
+
       const board = this.add.text(60, 210, buffer, { wordWrap: { width: 710 }, fill: '#fff' }).setOrigin(0);
 
       board.setMask(display);
@@ -68,4 +72,4 @@ export default class LeaderboardScene extends Phaser.Scene {
 
     this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
   }
-};
+}

@@ -36,7 +36,7 @@ export function setClickListener(elem, funct) {
 }
 
 export function setEnterListener(elem, funct) {
-  elem.addEventListener('keydown', function (e) {
+  elem.addEventListener('keydown', (e) => {
     if (e.keyCode === 13) {
       funct();
     }

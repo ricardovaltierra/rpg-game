@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import 'phaser';
 
 export default class Button extends Phaser.GameObjects.Container {
@@ -15,17 +17,17 @@ export default class Button extends Phaser.GameObjects.Container {
     this.add(this.button);
     this.add(this.text);
 
-    this.button.on('pointerdown', function () {
+    this.button.on('pointerdown', () => {
       this.scene.scene.start(targetScene);
-    }.bind(this));
+    });
 
-    this.button.on('pointerover', function () {
+    this.button.on('pointerover', () => {
       this.button.setTexture(key2).scale = 0.7;
-    }.bind(this));
+    });
 
-    this.button.on('pointerout', function () {
+    this.button.on('pointerout', () => {
       this.button.setTexture(key1);
-    }.bind(this));
+    });
 
     this.scene.add.existing(this);
   }

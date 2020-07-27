@@ -1,10 +1,13 @@
+/* eslint-disable import/no-cycle */
+
 import { setPlayer } from '../api/player';
-import initGame  from '../index';
-import { createElement, getElement, appendChild, appendChilds, appendToBody, setClickListener, setEnterListener } from './elementsHander';
+import initGame from '../index';
+import {
+  createElement, getElement, appendChild, appendChilds, appendToBody, setClickListener, setEnterListener,
+} from './elementsHander';
 
 export function domInit() {
-  
-  const inputWrapper = createElement('div', 'input-wrapper', '', '' );
+  const inputWrapper = createElement('div', 'input-wrapper', '', '');
   const checkBegin = createElement('input', 'checkbox', 'c-checkbox', '');
   const formWrapper = createElement('div', '', 'c-formContainer', '');
   const formPlayer = createElement('form', '', 'c-form', '');
@@ -34,20 +37,14 @@ export function domInit() {
 }
 
 export function checkForm() {
-  let playerName = getElement('player-input');
+  const playerName = getElement('player-input');
   if (playerName.value) {
-     let inputWrapper = getElement('input-wrapper');
-     document.body.removeChild(inputWrapper);
-     setPlayer(playerName.value);
-     initGame();
-    } else {
-     console.log('not value');
-     playerName.classList.add('error');
-     setTimeout(() => playerName.classList.remove('error'), 4000);
-    }
+    const inputWrapper = getElement('input-wrapper');
+    document.body.removeChild(inputWrapper);
+    setPlayer(playerName.value);
+    initGame();
+  } else {
+    playerName.classList.add('error');
+    setTimeout(() => playerName.classList.remove('error'), 4000);
+  }
 }
-
-
-
-
-

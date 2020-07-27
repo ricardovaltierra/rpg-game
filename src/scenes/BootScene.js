@@ -1,16 +1,18 @@
+/* eslint-disable no-undef */
+
 import 'phaser';
 import Apple from '../assets/jabolko(red).png';
 
 export default class BootScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Boot');
   }
 
-  preload () {
+  preload() {
     this.load.image('logo', Apple);
   }
-  
-  create () {
+
+  create() {
     this.scene.start('Preloader');
   }
-};
+}

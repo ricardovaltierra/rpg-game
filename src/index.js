@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/no-cycle */
+
 import 'phaser';
 import './assets/scss/style.scss';
 import './assets/scss/beginButton.scss';
@@ -14,10 +17,10 @@ import LeaderboardScene from './scenes/LeaderboardScene';
 import GameOverScene from './scenes/GameOverScene';
 import WinnerScene from './scenes/WinnerScene';
 import WorldScene from './scenes/WorldScene';
-import { BattleScene, UIScene }from './scenes/Battle';
+import { BattleScene, UIScene } from './scenes/Battle';
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };

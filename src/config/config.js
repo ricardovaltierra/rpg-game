@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import 'phaser';
 
 export default {
@@ -8,10 +10,10 @@ export default {
   zoom: 1,
   pixelArt: true,
   physics: {
-      default: 'arcade',
-      arcade: {
-          gravity: { y: 0 },
-          debug: false
-      }
-  }
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 0 },
+      debug: false,
+    },
+  },
 };

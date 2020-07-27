@@ -11,7 +11,7 @@ export const load = async () => {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: game,
   };
@@ -32,7 +32,7 @@ export const postPunctuation = async (name, score) => {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: post,
   };
@@ -60,7 +60,7 @@ export const getPunctuations = async () => {
     method: 'GET',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   };
 
