@@ -1,24 +1,27 @@
 body {
-  width:100vw;
+  width: 100vw;
   height: 90vh;
   background-color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
 }
+
 canvas {
-  align-self:center;
+  align-self: center;
   width: 800px;
   height: 600px;
 }
+
 .hidden {
   display: none;
 }
+
 .error {
   border: 2px solid maroon;
 }
+
 #input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-
 }
