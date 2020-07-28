@@ -147,8 +147,6 @@ Feel free to use and recommend this app.
 
 * [Webpack 4](https://webpack.js.org/)
 
-* [Heroku](https://webpack.js.org/)
-
 * npm Packages used:
     * [Babel](https://babeljs.io/)
     * [Jest](https://jestjs.io/)
