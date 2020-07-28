@@ -68,8 +68,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'LRRH',
-      filename: 'index.html'
-    })
+      filename: 'index.html',
+    }),
   ],
 
   devServer: {

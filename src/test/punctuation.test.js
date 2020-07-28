@@ -1,4 +1,7 @@
-import { setPunctuation, getPunctuation, resetPunctuation } from '../api/punctuation.js';
+/* eslint-disable no-undef */
+/* eslint-disable no-use-before-define */
+
+import { setPunctuation, getPunctuation, resetPunctuation } from '../api/punctuation';
 
 test('receive a default punctuation of 0 on getPunctuation`', () => {
   expect(getPunctuation()).toEqual(0);

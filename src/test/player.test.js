@@ -1,4 +1,4 @@
-import { setPlayer, getPlayer }from '../api/player';
+import { setPlayer, getPlayer } from '../api/player';
 
 test('get player name from player class with default as `player`', () => {
   expect(getPlayer()).toBe('player');
