@@ -66,7 +66,10 @@ module.exports = {
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'LRRH',
+      filename: 'index.html'
+    })
   ],
 
   devServer: {

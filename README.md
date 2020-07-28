@@ -16,7 +16,7 @@
   <br>
     <a href="https://github.com/ricardovaltierra/RPG-Game/issues">Request Feature</a>
   </p>
-  <h2 align="center"><a href="#"><strong>Game</strong></a></h2>
+  <h2 align="center"><a href="https://little-red-ridding-hood.netlify.app/"><strong>Live version</strong></a></h2>
 
 
 ## Table of Contents
