@@ -46,9 +46,11 @@
 
 Video game on ES6 basis with Phaser framework and Webpack 3 (including Jest TDD)
 
-The whole building rely on the main topics of the [GameDev Academy Phaser 3 Tutorial](https://gamedevacademy.org/how-to-create-a-turn-based-rpg-game-in-phaser-3-part-1/) with implementation of several functions explained on [Phaser 3 official doc](https://photonstorm.github.io/phaser3-docs/)
+Project Objetive:
 
-All of the reources used like the 'Begin' inital button design and canvas pictures are marked under its License at the bottom section.
+The whole building rely on the main topics of the [GameDev Academy Phaser 3 Tutorial](https://gamedevacademy.org/how-to-create-a-turn-based-rpg-game-in-phaser-3-part-1/) with implementation of several functions explained on [Phaser 3 official doc](https://photonstorm.github.io/phaser3-docs/). There was required to implement and consult from outer sources too to build and adapt the Tutorial to game tematic. Some of the desired behavior for this project like a dynamic canvas sizing is expected to be on a further release.
+
+All of the resources used like the 'Begin' inital button design and canvas pictures are marked under its License at the bottom section.
 
 ## Preview
 
@@ -182,7 +184,7 @@ This webpage is built with pure Javascript, it needs webpack to proper use becau
     ```
 *   Now the app is ready, you can just open your browser on `http://localhost:8080/`
     ```
-    $ npm test
+    $ npm run test
     ```
 *   For running Jest test suite
 
