@@ -52,7 +52,11 @@ All of the reources used like the 'Begin' inital button design and canvas pictur
 
 ## Preview
 
+<img src="./src/assets/gifs/usage_1.gif" alt="Game Menu" width="475"/>
 
+<img src="./src/assets/gifs/usage_2.gif" alt="Credits and game forest" width="475"/>
+
+<img src="./src/assets/gifs/usage_3.gif" alt="Game forest and Battle field" width="475"/>
 
 ## The Game
 
@@ -143,6 +147,8 @@ Feel free to use and recommend this app.
 
 * [Webpack 4](https://webpack.js.org/)
 
+* [Heroku](https://webpack.js.org/)
+
 * npm Packages used:
     * [Babel](https://babeljs.io/)
     * [Jest](https://jestjs.io/)
@@ -181,6 +187,10 @@ This webpage is built with pure Javascript, it needs webpack to proper use becau
     $ npm test
     ```
 *   For running Jest test suite
+
+> Phaser 3 bugs:
+>
+> [Here](https://groups.google.com/forum/#!topic/phaser3-dev/Mb_T3CPgLSk) about `Cannot add a Scene with duplicate key: BattleScene` error.
 
 ## Contributing
 
