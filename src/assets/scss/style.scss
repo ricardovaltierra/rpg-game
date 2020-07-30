@@ -11,7 +11,7 @@ body {
   background-color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
-  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 canvas {
@@ -42,7 +42,7 @@ canvas {
   left: 65px;
   top: 340px;
   background-color: rgb(243, 243, 243);
-  font-family: 'Atari Small';
+  font-family: 'Atari Small', sans-serif;
   color: white;
 }
 
@@ -54,7 +54,7 @@ canvas {
   right: 50px;
   top: 340px;
   background-color: rgb(243, 243, 243);
-  font-family: 'Atari Small';
+  font-family: 'Atari Small', sans-serif;
   color: white;
 }
 
@@ -78,7 +78,7 @@ canvas {
   font-size: 24px;
 }
 
-.eh-name { 
+.eh-name {
   position: relative;
   display: flex;
   margin: 2px;
@@ -86,7 +86,7 @@ canvas {
   letter-spacing: 15px;
 }
 
-.eh-life { 
+.eh-life {
   position: relative;
   display: inline;
   margin: 2px;
