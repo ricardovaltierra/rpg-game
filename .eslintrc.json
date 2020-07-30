@@ -15,5 +15,8 @@
     "eol-last": "off",
     "arrow-parens": "off"
   },
-  "ignorePatterns": ["dist/", "build/"]
+  "ignorePatterns": [
+    "dist/",
+    "build/"
+  ]
 }
