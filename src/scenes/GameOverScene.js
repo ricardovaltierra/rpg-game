@@ -31,7 +31,7 @@ export default class GameOverScene extends Phaser.Scene {
     const player = getPlayer();
     const punctuation = getPunctuation();
 
-    postPunctuation(player, punctuation);
+    if(punctuation > 0) postPunctuation(player, punctuation);
 
     this.menuButton = new Button(this, 400, 500, 'redButton1', 'redButton2', 'Menu', 'Title');
     resetPunctuation();

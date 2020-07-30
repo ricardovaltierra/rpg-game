@@ -27,7 +27,7 @@ export const postPunctuation = async (name, score) => {
     user: name,
     score,
   });
-  const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/kCCR0rwutvlGQVl87bD3/scores/';
+  const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Eq1s7detFoviwMnzNm8y/scores/';
   const data = {
     method: 'POST',
     headers: {
@@ -55,7 +55,7 @@ const sortResults = (data) => {
 };
 
 export const getPunctuations = async () => {
-  const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/kCCR0rwutvlGQVl87bD3/scores/';
+  const url = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/Eq1s7detFoviwMnzNm8y/scores/';
   const data = {
     method: 'GET',
     headers: {

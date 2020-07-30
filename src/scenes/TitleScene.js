@@ -12,6 +12,8 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
+    console.clear();
+
     this.logo = this.add.image(400, 200, 'logo').setOrigin(0.5, 1.2);
     this.logo.scale = 0.5;
 

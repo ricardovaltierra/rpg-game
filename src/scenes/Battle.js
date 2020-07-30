@@ -3,6 +3,10 @@
 
 import 'phaser';
 import { setPunctuation } from '../api/punctuation';
+import { 
+  getElement, setInner,
+  addToClass, removeToClass 
+} from '../dom/elementsHander';
 
 const MenuItem = new Phaser.Class({
   Extends: Phaser.GameObjects.Text,
@@ -159,12 +163,29 @@ const Unit = new Phaser.Class({
     this.menuItem = item;
   },
   attack(target) {
+    const enemy1N = getElement('enemy1-name');
+    const enemy2N = getElement('enemy2-name');
+    const hero1N = getElement('hero1-name');
+    const hero2N = getElement('hero2-name');
     if (target.living) {
-      // Uncomment for an even smoother game on console
-      // console.log(`${target.type} living before attack: ${target.hp}`);
+
       target.takeDamage(this.damage);
-      // console.log(`${target.type} get new living: ${target.hp} after attack`);
-      // console.log('--------------------------------');
+
+      switch (target.type) {
+        case enemy1N.textContent:
+          setInner(getElement('enemy1-life'), target.hp); 
+          break;
+        case enemy2N.textContent:
+          setInner(getElement('enemy2-life'), target.hp); 
+          break;
+        case hero1N.textContent:
+          setInner(getElement('hero1-life'), target.hp);
+          break;
+        case hero2N.textContent:
+          setInner(getElement('hero2-life'), target.hp); 
+          break;
+      }
+      
       this.scene.events.emit('Message', `${this.type} attacks ${target.type} for ${this.damage} damage`);
     }
   },
@@ -264,14 +285,16 @@ const BattleScene = new Phaser.Class({
     this.sys.events.on('wake', this.startBattle, this);
   },
   startBattle(data) {
-    // player character - warrior
+    
     const knight1 = new PlayerCharacter(this, 650, 125, 'knight1', 1, 'Knight 1', 100, 20);
+    setInner(getElement('hero1-life'), 100);
     knight1.scale = 0.45;
     knight1.flipX = false;
     this.add.existing(knight1);
 
-    // player character - mage
+    
     const knight2 = new PlayerCharacter(this, 650, 275, 'knight2', 4, 'Knight 2', 100, 15);
+    setInner(getElement('hero2-life'), 100);
     knight2.scale = 0.16;
     this.add.existing(knight2);
 
@@ -282,36 +305,52 @@ const BattleScene = new Phaser.Class({
       case 'group1':
 
         creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 15);
+        setInner(getElement('enemy1-name'), 'Werewolf');
+        setInner(getElement('enemy1-life'), 50);
         creature1.scale = 0.7;
 
         creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 15);
+        setInner(getElement('enemy2-name'), 'Vampire');
+        setInner(getElement('enemy2-life'), 50);
         creature2.scale = 0.9;
 
         break;
       case 'group2':
 
         creature1 = new Enemy(this, 240, 135, 'ghost1', null, 'Ghost', 70, 25);
+        setInner(getElement('enemy1-name'), 'Ghost');
+        setInner(getElement('enemy1-life'), 70);
         creature1.scale = 0.19;
 
         creature2 = new Enemy(this, 120, 310, 'monster1', null, 'Monster', 80, 25);
+        setInner(getElement('enemy2-name'), 'Monster');
+        setInner(getElement('enemy2-life'), 80);
         creature2.scale = 0.8;
 
         break;
       case 'group3':
 
         creature1 = new Enemy(this, 200, 110, 'werewolf2', null, 'Werewolf', 70, 20);
+        setInner(getElement('enemy1-name'), 'Werewolf');
+        setInner(getElement('enemy1-life'), 70);
         creature1.scale = 0.18;
 
         creature2 = new Enemy(this, 120, 280, 'vampire2', null, 'Vampire', 70, 30);
+        setInner(getElement('enemy2-name'), 'Vampire');
+        setInner(getElement('enemy2-life'), 70);
         creature2.scale = 0.35;
 
         break;
       case 'group4':
 
         creature1 = new Enemy(this, 200, 130, 'wizard1', null, 'Wizard', 90, 20);
+        setInner(getElement('enemy1-name'), 'Wizard');
+        setInner(getElement('enemy1-life'), 90);
         creature1.scale = 0.35;
 
         creature2 = new Enemy(this, 120, 300, 'ghost2', null, 'Ghost', 70, 30);
+        setInner(getElement('enemy2-name'), 'Ghost');
+        setInner(getElement('enemy2-life'), 70);
         creature2.flipX = true;
         creature2.scale = 0.5;
 
@@ -319,10 +358,14 @@ const BattleScene = new Phaser.Class({
       case 'group5':
 
         creature1 = new Enemy(this, 200, 120, 'monster2', null, 'Monster', 70, 25);
+        setInner(getElement('enemy1-name'), 'Monster');
+        setInner(getElement('enemy1-life'), 70);
         creature1.flipX = true;
         creature1.scale = 0.25;
 
         creature2 = new Enemy(this, 120, 300, 'zombie1', null, 'Zombie', 80, 30);
+        setInner(getElement('enemy2-name'), 'Zombie');
+        setInner(getElement('enemy2-life'), 80);
         creature2.flipX = true;
         creature2.scale = 0.3;
 
@@ -330,64 +373,93 @@ const BattleScene = new Phaser.Class({
       case 'group6':
 
         creature1 = new Enemy(this, 100, 160, 'wizard2', null, 'Wizard', 90, 30);
+        setInner(getElement('enemy1-name'), 'Wizard');
+        setInner(getElement('enemy1-life'), 90);
         creature1.scale = 0.5;
 
         creature2 = new Enemy(this, 200, 300, 'werewolf1', null, 'Werewolf', 70, 25);
+        setInner(getElement('enemy2-name'), 'Werewolf');
+        setInner(getElement('enemy2-life'), 70);
         creature2.scale = 0.7;
 
         break;
       case 'group7':
 
         creature1 = new Enemy(this, 200, 140, 'zombie2', null, 'Zombie', 80, 25);
+        setInner(getElement('enemy1-name'), 'Zombie');
+        setInner(getElement('enemy1-life'), 80);
         creature1.flipX = true;
         creature1.scale = 0.4;
 
         creature2 = new Enemy(this, 120, 300, 'werewolf2', null, 'Werewolf', 70, 35);
+        setInner(getElement('enemy2-name'), 'Werewolf');
+        setInner(getElement('enemy2-life'), 70);
         creature2.scale = 0.21;
 
         break;
       case 'group8':
 
         creature1 = new Enemy(this, 260, 180, 'witch1', null, 'Witch', 100, 30);
+        setInner(getElement('enemy1-name'), 'Witch');
+        setInner(getElement('enemy1-life'), 100);
         creature1.flipX = true;
         creature1.scale = 0.25;
 
         creature2 = new Enemy(this, 100, 320, 'vampire2', null, 'Vampire', 100, 15);
+        setInner(getElement('enemy2-name'), 'Vampire');
+        setInner(getElement('enemy2-life'), 100);
         creature2.scale = 0.35;
 
         break;
       case 'group9':
 
         creature1 = new Enemy(this, 230, 110, 'monster2', null, 'Monster', 60, 35);
+        setInner(getElement('enemy1-name'), 'Monster');
+        setInner(getElement('enemy1-life'), 60);
         creature1.flipX = true;
         creature1.scale = 0.25;
 
         creature2 = new Enemy(this, 120, 280, 'ghost1', null, 'Ghost', 50, 35);
+        setInner(getElement('enemy2-name'), 'Ghost');
+        setInner(getElement('enemy2-life'), 50);
         creature2.scale = 0.19;
 
         break;
       case 'group10':
 
         creature1 = new Enemy(this, 80, 200, 'ghost2', null, 'Ghost', 60, 40);
+        setInner(getElement('enemy1-name'), 'Ghost');
+        setInner(getElement('enemy1-life'), 60);
         creature1.flipX = true;
         creature1.scale = 0.38;
 
         creature2 = new Enemy(this, 300, 200, 'vampire1', null, 'Vampire', 70, 30);
+        setInner(getElement('enemy2-name'), 'Vampire');
+        setInner(getElement('enemy2-life'), 70);
         creature2.scale = 0.9;
 
         break;
       case 'group11':
 
         creature1 = new Enemy(this, 200, 200, 'witch2', null, 'Witch', 192, 45);
+        setInner(getElement('enemy1-name'), 'Witch');
+        setInner(getElement('enemy1-life'), 192);
         creature1.scale = 0.7;
 
+
+        addToClass(getElement('enemy-panel'), 'last-wrapper');
+        addToClass(getElement('enemy2-wrapper'), 'hidden');
         break;
       default:
 
         creature1 = new Enemy(this, 160, 110, 'werewolf1', null, 'Werewolf', 50, 3);
+        setInner(getElement('enemy1-name'), 'Werewolf');
+        setInner(getElement('enemy1-life'), 50);
         creature1.scale = 0.7;
 
         creature2 = new Enemy(this, 120, 280, 'vampire1', null, 'Vampire', 50, 3);
+        setInner(getElement('enemy2-name'), 'Vampire');
+        setInner(getElement('enemy2-life'), 50);
         creature2.scale = 0.9;
 
         break;
@@ -409,6 +481,8 @@ const BattleScene = new Phaser.Class({
     this.index = -1;
 
     // Run UI Scene at the same time
+    removeToClass(getElement('enemy-panel'), 'hidden');
+    removeToClass(getElement('hero-panel'), 'hidden');
     this.scene.launch('UIScene');
   },
   nextTurn() {
@@ -477,6 +551,10 @@ const BattleScene = new Phaser.Class({
     this.units.length = 0;
     this.index = -1;
     // sleep the UI
+    addToClass(getElement('enemy-panel'), 'hidden');
+    addToClass(getElement('hero-panel'), 'hidden');
+    removeToClass(getElement('enemy-panel'), 'last-wrapper');
+    removeToClass(getElement('enemy2-wrapper'), 'hidden');
     this.scene.stop('UIScene');
     this.scene.stop('BattleScene');
     this.scene.remove('UIScene');
@@ -487,8 +565,8 @@ const BattleScene = new Phaser.Class({
       this.scene.start('GameOver');
     } else if (result === 'victory') {
       setPunctuation(this.getPunctuation());
-      // Uncomment for an even smoother game on console
-      // console.log(`battle finished with punctuation ${this.getPunctuation()}`);
+      addToClass(getElement('enemy-panel'), 'hidden');
+      addToClass(getElement('hero-panel'), 'hidden');
       this.scene.wake('World');
     }
   },
