@@ -8,7 +8,7 @@
   Little Red Ridding Hood
 </h1>
 
-> Final Microverse JS Capstone Project.
+> Microverse JS Capstone Project.
 
 <p align="center">
   <br>
