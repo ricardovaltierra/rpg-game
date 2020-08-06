@@ -1,4 +1,4 @@
-# RPG-Game
+# RPG Game
 
 <p align="center">
   <img src="./src/assets/jabolko(red).png" alt="RED APPLE"  width="100">
