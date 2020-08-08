@@ -1,7 +1,7 @@
 # RPG Game
 
 <p align="center">
-  <img src="./src/assets/jabolko(red).png" alt="RED APPLE"  width="100">
+  <img src="assets/jabolko(red).png" alt="RED APPLE"  width="100">
 </p>
 
 <h1 align="center">
@@ -54,11 +54,11 @@ All of the resources used like the 'Begin' initial button design and canvas pict
 
 ## Preview
 
-<img src="./src/assets/gifs/usage_1.gif" alt="Game Menu" width="475"/>
+<img src="assets/gifs/usage_1.gif" alt="Game Menu" width="475"/>
 
-<img src="./src/assets/gifs/usage_2.gif" alt="Credits and game forest" width="475"/>
+<img src="assets/gifs/usage_2.gif" alt="Credits and game forest" width="475"/>
 
-<img src="./src/assets/gifs/usage_3.gif" alt="Game forest and Battle field" width="475"/>
+<img src="assets/gifs/usage_3.gif" alt="Game forest and Battle field" width="475"/>
 
 ## The Game
 
