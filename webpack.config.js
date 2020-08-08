@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -62,6 +64,12 @@ module.exports = {
   },
 
   plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'assets', '**', '*'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
       'typeof WEBGL_RENDERER': JSON.stringify(true),
