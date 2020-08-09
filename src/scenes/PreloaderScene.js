@@ -13,7 +13,7 @@ import 'phaser';
 var music = [
   {
     key: 'bgMusic',
-    url: '../../assets/TownTheme.mp3',
+    url: 'assets/TownTheme.mp3',
     config: {
       volume: 0.1,
       loop: true
