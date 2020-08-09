@@ -10,6 +10,15 @@ import 'phaser';
 
 // enemies
 
+var music = [
+  {
+    key: 'bgMusic',
+    url: '../../assets/TownTheme.mp3',
+    config: {
+      volume: 0.1,
+      loop: true
+    }
+  },];
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -94,8 +103,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.load.image('box', '../../assets/ui/boxSelect.png');
     this.load.image('checkedBox', '../../assets/ui/boxNormal.png');
-    this.load.audio('bgMusic', ['../../assets/TownTheme.mp3']);
-
+    this.load.audio(music);
 
     // map
     this.load.image('map-piece', '../../assets/map/map-piece.jpg');
