@@ -97,13 +97,10 @@ function setIcon() {
   var dateSet = new Date(2020, 8, 11);
 
   ogImage.setAttribute('property', 'og:image');
-  ogImage.name = 'image';
   liImage.name = 'linkedin:image';
   ogURL.setAttribute('property', 'og:url');
-  ogURL.name = 'url';
   liCard.name = 'linkedin:card';
   ogDesc.setAttribute('property', 'og:description');
-  ogDesc.name = 'description';
   ogTitle.setAttribute('property', 'og:title');
   author.name = 'author';
 
