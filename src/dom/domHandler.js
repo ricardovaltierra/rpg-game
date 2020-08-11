@@ -96,19 +96,22 @@ function setIcon() {
   const date    = createElement('meta', '', '', '');
 
   ogImage.setAttribute('property', 'og:image');
+  ogImage.name = 'image';
   liImage.name = 'linkedin:image';
   ogURL.setAttribute('property', 'og:url');
+  ogURL.name = 'url';
   liCard.name = 'linkedin:card';
   ogDesc.setAttribute('property', 'og:description');
+  ogDesc.name = 'description';
   ogTitle.setAttribute('property', 'og:title');
   author.name = 'author';
   date.name = 'date';
 
-  ogImage.content = 'assets/gifs/usage_1.gif';
-  liImage.content = 'assets/gifs/usage_1.gif';
+  ogImage.content = 'https://github.com/ricardovaltierra/rpg-game/blob/development/assets/gifs/usage_1.gif';
+  liImage.content = 'https://github.com/ricardovaltierra/rpg-game/blob/development/assets/gifs/usage_1.gif';
   ogURL.content = 'little-red-ridding-hood.netlify.app/';
   liCard.content = 'summary';
-  ogDesc.content = 'A mobile-first weather app with the use of AerisWeather API service allowing users to make queries via Algolia Places about forecast on F° || C°.';
+  ogDesc.content = 'Little red Riding Hood Turn-Based RPG Video Game';
   ogTitle.content = 'Weather App';
   author.content = 'Ricardo Valtierra';
   date.content = 'Aug. 11, 2020';
