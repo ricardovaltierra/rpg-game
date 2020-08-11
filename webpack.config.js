@@ -78,6 +78,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'LRRH',
       filename: 'index.html',
+      meta: {
+        author: 'Ricardo Valtierra',
+        'og:image': { 'property': 'og:image', content: 'https://opengameart.org/sites/default/files/jabolko%28red%29.png' },
+        'linkedin:image': { 'name': 'linkedin:image', content: 'https://opengameart.org/sites/default/files/jabolko%28red%29.png' },
+        'og:url': { 'property': 'og:url', content: 'little-red-ridding-hood.netlify.app/' },
+        'linkedin:card':  'summary',
+        'og:description': { 'property': 'og:description', content: 'Little Red Riding Hood Turn-Based RPG Video Game' },
+        'og:title': { 'property': 'og:title', content: 'Little Red Riding Hood' },        
+      },
     }),
   ],
 

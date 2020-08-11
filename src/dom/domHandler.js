@@ -85,37 +85,8 @@ function setIcon() {
   linkIcon.rel = 'icon';
   linkIcon.type = 'image/png';
   linkIcon.href = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
-
-  const ogImage = createElement('meta', '', '', '');
-  const liImage = createElement('meta', '', '', '');
-  const ogURL   = createElement('meta', '', '', '');
-  const liCard  = createElement('meta', '', '', '');
-  const ogDesc  = createElement('meta', '', '', '');
-  const ogTitle = createElement('meta', '', '', '');
-  const author  = createElement('meta', '', '', '');
-  const date    = createElement('abbr', '', 'published', 'Aug. 11, 2020');
-  var dateSet = new Date(2020, 8, 11);
-
-  ogImage.setAttribute('property', 'og:image');
-  liImage.name = 'linkedin:image';
-  ogURL.setAttribute('property', 'og:url');
-  liCard.name = 'linkedin:card';
-  ogDesc.setAttribute('property', 'og:description');
-  ogTitle.setAttribute('property', 'og:title');
-  author.name = 'author';
-
-  ogImage.content = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
-  liImage.content = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
-  ogURL.content = 'little-red-ridding-hood.netlify.app/';
-  liCard.content = 'summary';
-  ogDesc.content = 'Little Red Riding Hood Turn-Based RPG Video Game';
-  ogTitle.content = 'Little Red Riding Hood';
-  author.content = 'Ricardo Valtierra';
-  date.title = dateSet;
-
-
-
-  appendChilds(head, [linkIcon, ogImage, liImage, ogURL, liCard, ogDesc, ogTitle, author, date]);
+  
+  appendChild(head, linkIcon);
 }
 
 export function domInit() {
