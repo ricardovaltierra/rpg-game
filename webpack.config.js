@@ -80,8 +80,8 @@ module.exports = {
       filename: 'index.html',
       meta: {
         author: 'Ricardo Valtierra',
-        'og:image': { 'property': 'og:image', content: '../assets/gifs/usage_1.gif' },
-        'linkedin:image': { 'name': 'linkedin:image', content: '../assets/gifs/usage_1.gif' },
+        'og:image': { 'property': 'og:image', content: '../assets/gifs/usage_3.gif' },
+        'linkedin:image': { 'name': 'linkedin:image', content: '../assets/gifs/usage_3.gif' },
         'og:url': { 'property': 'og:url', content: 'little-red-ridding-hood.netlify.app/' },
         'linkedin:card':  'summary',
         'og:description': { 'property': 'og:description', content: 'Little Red Riding Hood Turn-Based RPG Video Game' },
