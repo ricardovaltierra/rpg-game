@@ -86,7 +86,36 @@ function setIcon() {
   linkIcon.type = 'image/png';
   linkIcon.href = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
 
-  appendChild(head, linkIcon);
+  const ogImage = createElement('meta', '', '', '');
+  const liImage = createElement('meta', '', '', '');
+  const ogURL   = createElement('meta', '', '', '');
+  const liCard  = createElement('meta', '', '', '');
+  const ogDesc  = createElement('meta', '', '', '');
+  const ogTitle = createElement('meta', '', '', '');
+  const author  = createElement('meta', '', '', '');
+  const date    = createElement('meta', '', '', '');
+
+  ogImage.setAttribute('property', 'og:image');
+  liImage.name = 'linkedin:image';
+  ogURL.setAttribute('property', 'og:url');
+  liCard.name = 'linkedin:card';
+  ogDesc.setAttribute('property', 'og:description');
+  ogTitle.setAttribute('property', 'og:title');
+  author.name = 'author';
+  date.name = 'date';
+
+  ogImage.content = 'assets/gifs/usage_1.gif';
+  liImage.content = 'assets/gifs/usage_1.gif';
+  ogURL.content = 'little-red-ridding-hood.netlify.app/';
+  liCard.content = 'summary';
+  ogDesc.content = 'A mobile-first weather app with the use of AerisWeather API service allowing users to make queries via Algolia Places about forecast on F° || C°.';
+  ogTitle.content = 'Weather App';
+  author.content = 'Ricardo Valtierra';
+  date.content = 'Aug. 11, 2020';
+
+
+
+  appendChilds(head, [linkIcon, ogImage, liImage, ogURL, liCard, ogDesc, ogTitle, author, date]);
 }
 
 export function domInit() {
