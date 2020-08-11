@@ -111,8 +111,8 @@ function setIcon() {
   liImage.content = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
   ogURL.content = 'little-red-ridding-hood.netlify.app/';
   liCard.content = 'summary';
-  ogDesc.content = 'Little red Riding Hood Turn-Based RPG Video Game';
-  ogTitle.content = 'Weather App';
+  ogDesc.content = 'Little Red Riding Hood Turn-Based RPG Video Game';
+  ogTitle.content = 'Little Red Riding Hood';
   author.content = 'Ricardo Valtierra';
   date.title = dateSet;
 
