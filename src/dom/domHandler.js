@@ -93,7 +93,8 @@ function setIcon() {
   const ogDesc  = createElement('meta', '', '', '');
   const ogTitle = createElement('meta', '', '', '');
   const author  = createElement('meta', '', '', '');
-  const date    = createElement('meta', '', '', '');
+  const date    = createElement('abbr', '', 'published', 'Aug. 11, 2020');
+  var dateSet = new Date(2020, 8, 11);
 
   ogImage.setAttribute('property', 'og:image');
   ogImage.name = 'image';
@@ -105,16 +106,15 @@ function setIcon() {
   ogDesc.name = 'description';
   ogTitle.setAttribute('property', 'og:title');
   author.name = 'author';
-  date.name = 'date';
 
-  ogImage.content = 'https://github.com/ricardovaltierra/rpg-game/blob/development/assets/gifs/usage_1.gif';
-  liImage.content = 'https://github.com/ricardovaltierra/rpg-game/blob/development/assets/gifs/usage_1.gif';
+  ogImage.content = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
+  liImage.content = 'https://opengameart.org/sites/default/files/jabolko%28red%29.png';
   ogURL.content = 'little-red-ridding-hood.netlify.app/';
   liCard.content = 'summary';
   ogDesc.content = 'Little red Riding Hood Turn-Based RPG Video Game';
   ogTitle.content = 'Weather App';
   author.content = 'Ricardo Valtierra';
-  date.content = 'Aug. 11, 2020';
+  date.title = dateSet;
 
 
 
