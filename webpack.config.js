@@ -80,8 +80,8 @@ module.exports = {
       filename: 'index.html',
       meta: {
         author: 'Ricardo Valtierra',
-        'og:image': { 'property': 'og:image', content: 'https://raw.githubusercontent.com/ricardovaltierra/rpg-game/master/assets/preview.png' },
-        'linkedin:image': { 'name': 'linkedin:image', content: 'https://raw.githubusercontent.com/ricardovaltierra/rpg-game/master/assets/preview.png' },
+        'og:image': { 'property': 'og:image', content: 'https://raw.githubusercontent.com/ricardovaltierra/rpg-game/development/assets/preview.png' },
+        'linkedin:image': { 'name': 'linkedin:image', content: 'https://raw.githubusercontent.com/ricardovaltierra/rpg-game/development/assets/preview.png' },
         'og:url': { 'property': 'og:url', content: 'little-red-ridding-hood.netlify.app/' },
         'linkedin:card':  'summary',
         'og:description': { 'property': 'og:description', content: 'Little Red Riding Hood turn-based RPG videogame' },
