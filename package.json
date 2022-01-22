@@ -51,7 +51,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "phaser": "^3.22.0",
     "regenerator-runtime": "^0.13.7"
   }
